@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kingcai.dao.BipTSynchropluginlogMapper" >
+  <resultMap id="BaseResultMap" type="cn.kingcai.entity.BipTSynchropluginlog" >
+    <result column="fpkid" property="fpkid" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.kingcai.entity.BipTSynchropluginlog" extends="BaseResultMap" >
+    <result column="fcreatedate" property="fcreatedate" jdbcType="LONGVARCHAR" />
+    <result column="fresult" property="fresult" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fpkid
+  </sql>
+  <sql id="Blob_Column_List" >
+    fcreatedate, fresult
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.kingcai.entity.BipTSynchropluginlogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from bip_t_synchropluginlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kingcai.entity.BipTSynchropluginlogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bip_t_synchropluginlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.kingcai.entity.BipTSynchropluginlogExample" >
+    delete from bip_t_synchropluginlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.kingcai.entity.BipTSynchropluginlog" >
+    insert into bip_t_synchropluginlog (fpkid, fcreatedate, fresult
+      )
+    values (#{fpkid,jdbcType=BIGINT}, #{fcreatedate,jdbcType=LONGVARCHAR}, #{fresult,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.kingcai.entity.BipTSynchropluginlog" >
+    insert into bip_t_synchropluginlog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fpkid != null" >
+        fpkid,
+      </if>
+      <if test="fcreatedate != null" >
+        fcreatedate,
+      </if>
+      <if test="fresult != null" >
+        fresult,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fpkid != null" >
+        #{fpkid,jdbcType=BIGINT},
+      </if>
+      <if test="fcreatedate != null" >
+        #{fcreatedate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="fresult != null" >
+        #{fresult,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.kingcai.entity.BipTSynchropluginlogExample" resultType="java.lang.Integer" >
+    select count(*) from bip_t_synchropluginlog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bip_t_synchropluginlog
+    <set >
+      <if test="record.fpkid != null" >
+        fpkid = #{record.fpkid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fcreatedate != null" >
+        fcreatedate = #{record.fcreatedate,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.fresult != null" >
+        fresult = #{record.fresult,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update bip_t_synchropluginlog
+    set fpkid = #{record.fpkid,jdbcType=BIGINT},
+      fcreatedate = #{record.fcreatedate,jdbcType=LONGVARCHAR},
+      fresult = #{record.fresult,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bip_t_synchropluginlog
+    set fpkid = #{record.fpkid,jdbcType=BIGINT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

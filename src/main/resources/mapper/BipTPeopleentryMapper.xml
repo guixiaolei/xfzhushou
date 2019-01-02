@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kingcai.dao.BipTPeopleentryMapper" >
+  <!-- <resultMap id="BaseResultMap" type="cn.kingcai.entity.Peopleentry" >
+    <result column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="fentryid" property="fentryid" jdbcType="BIGINT" />
+    <result column="fseq" property="fseq" jdbcType="INTEGER" />
+    <result column="f_bip_names" property="fBipNames" jdbcType="VARCHAR" />
+    <result column="f_bip_idcards" property="fBipIdcards" jdbcType="VARCHAR" />
+    <result column="f_bip_sexs" property="fBipSexs" jdbcType="VARCHAR" />
+    <result column="f_bip_nations" property="fBipNations" jdbcType="VARCHAR" />
+    <result column="f_bip_birthdates" property="fBipBirthdates" jdbcType="TIMESTAMP" />
+    <result column="f_bip_tels" property="fBipTels" jdbcType="VARCHAR" />
+    <result column="f_bip_outlooks" property="fBipOutlooks" jdbcType="VARCHAR" />
+    <result column="f_bip_headimages" property="fBipHeadimages" jdbcType="VARCHAR" />
+    <result column="f_bip_recentimages" property="fBipRecentimages" jdbcType="VARCHAR" />
+    <result column="f_bip_nowaddresss" property="fBipNowaddresss" jdbcType="VARCHAR" />
+    <result column="f_bip_nationaddresss" property="fBipNationaddresss" jdbcType="VARCHAR" />
+  </resultMap> -->
+  
+  
+  <!-- 大厅登记保存到信访人 -->
+  <insert id="saveToBody">
+  	insert into bip_t_peopleentry (fid, fentryid, fseq, 
+      f_bip_names, f_bip_idcards, f_bip_sexs, 
+      f_bip_nations, f_bip_birthdates, f_bip_tels, 
+      f_bip_outlooks, f_bip_headimages, f_bip_recentimages, 
+      f_bip_nowaddresss, f_bip_nationaddresss)
+    values (#{fid,jdbcType=BIGINT}, #{fentryid,jdbcType=BIGINT}, #{fseq,jdbcType=INTEGER}, 
+      #{fBipPetitionername,jdbcType=VARCHAR}, #{fBipComplainantsnumerid,jdbcType=VARCHAR}, #{fBipSex,jdbcType=VARCHAR}, 
+      #{fBipNation,jdbcType=VARCHAR}, #{fBipBirthdate,jdbcType=TIMESTAMP}, #{fBipPetitionerphone,jdbcType=VARCHAR}, 
+      #{fBipPoliticaloutlook,jdbcType=VARCHAR}, #{fBipHeadimage,jdbcType=VARCHAR}, #{fBipRecentphotos,jdbcType=VARCHAR}, 
+      #{fBipAddress,jdbcType=VARCHAR}, #{fBipNativeplace,jdbcType=VARCHAR})
+  </insert>
+  <!-- 根据fid查询信访人单据体列表 -->
+  <select id="showBodyList" resultType="java.util.HashMap">
+  		select f_bip_names,
+			f_bip_idcards,
+			f_bip_sexs,
+			f_bip_nations,
+			f_bip_birthdates,
+			f_bip_tels,
+			f_bip_outlooks,
+			f_bip_headimages,
+			f_bip_recentimages,
+			f_bip_nowaddresss,
+			f_bip_nationaddresss
+			from bip_t_peopleentry where fid=#{fid}
+  </select>
+  
+ <!--  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fid, fentryid, fseq, f_bip_names, f_bip_idcards, f_bip_sexs, f_bip_nations, f_bip_birthdates, 
+    f_bip_tels, f_bip_outlooks, f_bip_headimages, f_bip_recentimages, f_bip_nowaddresss, 
+    f_bip_nationaddresss
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kingcai.entity.BipTPeopleentryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bip_t_peopleentry
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.kingcai.entity.BipTPeopleentryExample" >
+    delete from bip_t_peopleentry
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.kingcai.entity.BipTPeopleentry" >
+    insert into bip_t_peopleentry (fid, fentryid, fseq, 
+      f_bip_names, f_bip_idcards, f_bip_sexs, 
+      f_bip_nations, f_bip_birthdates, f_bip_tels, 
+      f_bip_outlooks, f_bip_headimages, f_bip_recentimages, 
+      f_bip_nowaddresss, f_bip_nationaddresss)
+    values (#{fid,jdbcType=BIGINT}, #{fentryid,jdbcType=BIGINT}, #{fseq,jdbcType=INTEGER}, 
+      #{fBipNames,jdbcType=VARCHAR}, #{fBipIdcards,jdbcType=VARCHAR}, #{fBipSexs,jdbcType=VARCHAR}, 
+      #{fBipNations,jdbcType=VARCHAR}, #{fBipBirthdates,jdbcType=TIMESTAMP}, #{fBipTels,jdbcType=VARCHAR}, 
+      #{fBipOutlooks,jdbcType=VARCHAR}, #{fBipHeadimages,jdbcType=VARCHAR}, #{fBipRecentimages,jdbcType=VARCHAR}, 
+      #{fBipNowaddresss,jdbcType=VARCHAR}, #{fBipNationaddresss,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.kingcai.entity.BipTPeopleentry" >
+    insert into bip_t_peopleentry
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fentryid != null" >
+        fentryid,
+      </if>
+      <if test="fseq != null" >
+        fseq,
+      </if>
+      <if test="fBipNames != null" >
+        f_bip_names,
+      </if>
+      <if test="fBipIdcards != null" >
+        f_bip_idcards,
+      </if>
+      <if test="fBipSexs != null" >
+        f_bip_sexs,
+      </if>
+      <if test="fBipNations != null" >
+        f_bip_nations,
+      </if>
+      <if test="fBipBirthdates != null" >
+        f_bip_birthdates,
+      </if>
+      <if test="fBipTels != null" >
+        f_bip_tels,
+      </if>
+      <if test="fBipOutlooks != null" >
+        f_bip_outlooks,
+      </if>
+      <if test="fBipHeadimages != null" >
+        f_bip_headimages,
+      </if>
+      <if test="fBipRecentimages != null" >
+        f_bip_recentimages,
+      </if>
+      <if test="fBipNowaddresss != null" >
+        f_bip_nowaddresss,
+      </if>
+      <if test="fBipNationaddresss != null" >
+        f_bip_nationaddresss,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="fentryid != null" >
+        #{fentryid,jdbcType=BIGINT},
+      </if>
+      <if test="fseq != null" >
+        #{fseq,jdbcType=INTEGER},
+      </if>
+      <if test="fBipNames != null" >
+        #{fBipNames,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipIdcards != null" >
+        #{fBipIdcards,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipSexs != null" >
+        #{fBipSexs,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipNations != null" >
+        #{fBipNations,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipBirthdates != null" >
+        #{fBipBirthdates,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipTels != null" >
+        #{fBipTels,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipOutlooks != null" >
+        #{fBipOutlooks,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipHeadimages != null" >
+        #{fBipHeadimages,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipRecentimages != null" >
+        #{fBipRecentimages,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipNowaddresss != null" >
+        #{fBipNowaddresss,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipNationaddresss != null" >
+        #{fBipNationaddresss,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.kingcai.entity.BipTPeopleentryExample" resultType="java.lang.Integer" >
+    select count(*) from bip_t_peopleentry
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bip_t_peopleentry
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fentryid != null" >
+        fentryid = #{record.fentryid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fseq != null" >
+        fseq = #{record.fseq,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipNames != null" >
+        f_bip_names = #{record.fBipNames,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipIdcards != null" >
+        f_bip_idcards = #{record.fBipIdcards,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipSexs != null" >
+        f_bip_sexs = #{record.fBipSexs,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipNations != null" >
+        f_bip_nations = #{record.fBipNations,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipBirthdates != null" >
+        f_bip_birthdates = #{record.fBipBirthdates,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipTels != null" >
+        f_bip_tels = #{record.fBipTels,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipOutlooks != null" >
+        f_bip_outlooks = #{record.fBipOutlooks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipHeadimages != null" >
+        f_bip_headimages = #{record.fBipHeadimages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipRecentimages != null" >
+        f_bip_recentimages = #{record.fBipRecentimages,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipNowaddresss != null" >
+        f_bip_nowaddresss = #{record.fBipNowaddresss,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipNationaddresss != null" >
+        f_bip_nationaddresss = #{record.fBipNationaddresss,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bip_t_peopleentry
+    set fid = #{record.fid,jdbcType=BIGINT},
+      fentryid = #{record.fentryid,jdbcType=BIGINT},
+      fseq = #{record.fseq,jdbcType=INTEGER},
+      f_bip_names = #{record.fBipNames,jdbcType=VARCHAR},
+      f_bip_idcards = #{record.fBipIdcards,jdbcType=VARCHAR},
+      f_bip_sexs = #{record.fBipSexs,jdbcType=VARCHAR},
+      f_bip_nations = #{record.fBipNations,jdbcType=VARCHAR},
+      f_bip_birthdates = #{record.fBipBirthdates,jdbcType=TIMESTAMP},
+      f_bip_tels = #{record.fBipTels,jdbcType=VARCHAR},
+      f_bip_outlooks = #{record.fBipOutlooks,jdbcType=VARCHAR},
+      f_bip_headimages = #{record.fBipHeadimages,jdbcType=VARCHAR},
+      f_bip_recentimages = #{record.fBipRecentimages,jdbcType=VARCHAR},
+      f_bip_nowaddresss = #{record.fBipNowaddresss,jdbcType=VARCHAR},
+      f_bip_nationaddresss = #{record.fBipNationaddresss,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update> -->
+</mapper>

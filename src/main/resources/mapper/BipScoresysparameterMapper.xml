@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kingcai.dao.BipScoresysparameterMapper" >
+  <resultMap id="BaseResultMap" type="cn.kingcai.entity.BipScoresysparameter" >
+    <result column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="fmasterid" property="fmasterid" jdbcType="INTEGER" />
+    <result column="fdocumentstatus" property="fdocumentstatus" jdbcType="VARCHAR" />
+    <result column="fforbidstatus" property="fforbidstatus" jdbcType="VARCHAR" />
+    <result column="fnumber" property="fnumber" jdbcType="VARCHAR" />
+    <result column="fcreateorgid" property="fcreateorgid" jdbcType="INTEGER" />
+    <result column="fuseorgid" property="fuseorgid" jdbcType="INTEGER" />
+    <result column="fcreatorid" property="fcreatorid" jdbcType="INTEGER" />
+    <result column="fmodifierid" property="fmodifierid" jdbcType="INTEGER" />
+    <result column="fcreatedate" property="fcreatedate" jdbcType="TIMESTAMP" />
+    <result column="fmodifydate" property="fmodifydate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_userid" property="fBipUserid" jdbcType="INTEGER" />
+    <result column="f_bip_date" property="fBipDate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_userid1" property="fBipUserid1" jdbcType="INTEGER" />
+    <result column="f_bip_date1" property="fBipDate1" jdbcType="TIMESTAMP" />
+    <result column="f_bip_awareoftime" property="fBipAwareoftime" jdbcType="DECIMAL" />
+    <result column="f_bip_fieldtime" property="fBipFieldtime" jdbcType="DECIMAL" />
+    <result column="f_bip_overtime" property="fBipOvertime" jdbcType="DECIMAL" />
+    <result column="f_bip_awareoftime1" property="fBipAwareoftime1" jdbcType="DECIMAL" />
+    <result column="f_bip_arrivetime1" property="fBipArrivetime1" jdbcType="DECIMAL" />
+    <result column="f_bip_fieldtime1" property="fBipFieldtime1" jdbcType="DECIMAL" />
+    <result column="f_bip_overtime1" property="fBipOvertime1" jdbcType="DECIMAL" />
+    <result column="f_bip_arrivetimep" property="fBipArrivetimep" jdbcType="DECIMAL" />
+    <result column="f_bip_arrivetimecity" property="fBipArrivetimecity" jdbcType="DECIMAL" />
+    <result column="f_bip_arrivetimebj" property="fBipArrivetimebj" jdbcType="DECIMAL" />
+    <result column="f_bip_begindate" property="fBipBegindate" jdbcType="TIMESTAMP" />
+    <result column="fname" property="fname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fid, fmasterid, fdocumentstatus, fforbidstatus, fnumber, fcreateorgid, fuseorgid, 
+    fcreatorid, fmodifierid, fcreatedate, fmodifydate, f_bip_userid, f_bip_date, f_bip_userid1, 
+    f_bip_date1, f_bip_awareoftime, f_bip_fieldtime, f_bip_overtime, f_bip_awareoftime1, 
+    f_bip_arrivetime1, f_bip_fieldtime1, f_bip_overtime1, f_bip_arrivetimep, f_bip_arrivetimecity, 
+    f_bip_arrivetimebj, f_bip_begindate, fname
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kingcai.entity.BipScoresysparameterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bip_scoresysparameter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.kingcai.entity.BipScoresysparameterExample" >
+    delete from bip_scoresysparameter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.kingcai.entity.BipScoresysparameter" >
+    insert into bip_scoresysparameter (fid, fmasterid, fdocumentstatus, 
+      fforbidstatus, fnumber, fcreateorgid, 
+      fuseorgid, fcreatorid, fmodifierid, 
+      fcreatedate, fmodifydate, f_bip_userid, 
+      f_bip_date, f_bip_userid1, f_bip_date1, 
+      f_bip_awareoftime, f_bip_fieldtime, f_bip_overtime, 
+      f_bip_awareoftime1, f_bip_arrivetime1, f_bip_fieldtime1, 
+      f_bip_overtime1, f_bip_arrivetimep, f_bip_arrivetimecity, 
+      f_bip_arrivetimebj, f_bip_begindate, fname
+      )
+    values (#{fid,jdbcType=INTEGER}, #{fmasterid,jdbcType=INTEGER}, #{fdocumentstatus,jdbcType=VARCHAR}, 
+      #{fforbidstatus,jdbcType=VARCHAR}, #{fnumber,jdbcType=VARCHAR}, #{fcreateorgid,jdbcType=INTEGER}, 
+      #{fuseorgid,jdbcType=INTEGER}, #{fcreatorid,jdbcType=INTEGER}, #{fmodifierid,jdbcType=INTEGER}, 
+      #{fcreatedate,jdbcType=TIMESTAMP}, #{fmodifydate,jdbcType=TIMESTAMP}, #{fBipUserid,jdbcType=INTEGER}, 
+      #{fBipDate,jdbcType=TIMESTAMP}, #{fBipUserid1,jdbcType=INTEGER}, #{fBipDate1,jdbcType=TIMESTAMP}, 
+      #{fBipAwareoftime,jdbcType=DECIMAL}, #{fBipFieldtime,jdbcType=DECIMAL}, #{fBipOvertime,jdbcType=DECIMAL}, 
+      #{fBipAwareoftime1,jdbcType=DECIMAL}, #{fBipArrivetime1,jdbcType=DECIMAL}, #{fBipFieldtime1,jdbcType=DECIMAL}, 
+      #{fBipOvertime1,jdbcType=DECIMAL}, #{fBipArrivetimep,jdbcType=DECIMAL}, #{fBipArrivetimecity,jdbcType=DECIMAL}, 
+      #{fBipArrivetimebj,jdbcType=DECIMAL}, #{fBipBegindate,jdbcType=TIMESTAMP}, #{fname,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.kingcai.entity.BipScoresysparameter" >
+    insert into bip_scoresysparameter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fmasterid != null" >
+        fmasterid,
+      </if>
+      <if test="fdocumentstatus != null" >
+        fdocumentstatus,
+      </if>
+      <if test="fforbidstatus != null" >
+        fforbidstatus,
+      </if>
+      <if test="fnumber != null" >
+        fnumber,
+      </if>
+      <if test="fcreateorgid != null" >
+        fcreateorgid,
+      </if>
+      <if test="fuseorgid != null" >
+        fuseorgid,
+      </if>
+      <if test="fcreatorid != null" >
+        fcreatorid,
+      </if>
+      <if test="fmodifierid != null" >
+        fmodifierid,
+      </if>
+      <if test="fcreatedate != null" >
+        fcreatedate,
+      </if>
+      <if test="fmodifydate != null" >
+        fmodifydate,
+      </if>
+      <if test="fBipUserid != null" >
+        f_bip_userid,
+      </if>
+      <if test="fBipDate != null" >
+        f_bip_date,
+      </if>
+      <if test="fBipUserid1 != null" >
+        f_bip_userid1,
+      </if>
+      <if test="fBipDate1 != null" >
+        f_bip_date1,
+      </if>
+      <if test="fBipAwareoftime != null" >
+        f_bip_awareoftime,
+      </if>
+      <if test="fBipFieldtime != null" >
+        f_bip_fieldtime,
+      </if>
+      <if test="fBipOvertime != null" >
+        f_bip_overtime,
+      </if>
+      <if test="fBipAwareoftime1 != null" >
+        f_bip_awareoftime1,
+      </if>
+      <if test="fBipArrivetime1 != null" >
+        f_bip_arrivetime1,
+      </if>
+      <if test="fBipFieldtime1 != null" >
+        f_bip_fieldtime1,
+      </if>
+      <if test="fBipOvertime1 != null" >
+        f_bip_overtime1,
+      </if>
+      <if test="fBipArrivetimep != null" >
+        f_bip_arrivetimep,
+      </if>
+      <if test="fBipArrivetimecity != null" >
+        f_bip_arrivetimecity,
+      </if>
+      <if test="fBipArrivetimebj != null" >
+        f_bip_arrivetimebj,
+      </if>
+      <if test="fBipBegindate != null" >
+        f_bip_begindate,
+      </if>
+      <if test="fname != null" >
+        fname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="fmasterid != null" >
+        #{fmasterid,jdbcType=INTEGER},
+      </if>
+      <if test="fdocumentstatus != null" >
+        #{fdocumentstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fforbidstatus != null" >
+        #{fforbidstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fnumber != null" >
+        #{fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreateorgid != null" >
+        #{fcreateorgid,jdbcType=INTEGER},
+      </if>
+      <if test="fuseorgid != null" >
+        #{fuseorgid,jdbcType=INTEGER},
+      </if>
+      <if test="fcreatorid != null" >
+        #{fcreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="fmodifierid != null" >
+        #{fmodifierid,jdbcType=INTEGER},
+      </if>
+      <if test="fcreatedate != null" >
+        #{fcreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifydate != null" >
+        #{fmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipUserid != null" >
+        #{fBipUserid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipDate != null" >
+        #{fBipDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipUserid1 != null" >
+        #{fBipUserid1,jdbcType=INTEGER},
+      </if>
+      <if test="fBipDate1 != null" >
+        #{fBipDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipAwareoftime != null" >
+        #{fBipAwareoftime,jdbcType=DECIMAL},
+      </if>
+      <if test="fBipFieldtime != null" >
+        #{fBipFieldtime,jdbcType=DECIMAL},
+      </if>
+      <if test="fBipOvertime != null" >
+        #{fBipOvertime,jdbcType=DECIMAL},
+      </if>
+      <if test="fBipAwareoftime1 != null" >
+        #{fBipAwareoftime1,jdbcType=DECIMAL},
+      </if>
+      <if test="fBipArrivetime1 != null" >
+        #{fBipArrivetime1,jdbcType=DECIMAL},
+      </if>
+      <if test="fBipFieldtime1 != null" >
+        #{fBipFieldtime1,jdbcType=DECIMAL},
+      </if>
+      <if test="fBipOvertime1 != null" >
+        #{fBipOvertime1,jdbcType=DECIMAL},
+      </if>
+      <if test="fBipArrivetimep != null" >
+        #{fBipArrivetimep,jdbcType=DECIMAL},
+      </if>
+      <if test="fBipArrivetimecity != null" >
+        #{fBipArrivetimecity,jdbcType=DECIMAL},
+      </if>
+      <if test="fBipArrivetimebj != null" >
+        #{fBipArrivetimebj,jdbcType=DECIMAL},
+      </if>
+      <if test="fBipBegindate != null" >
+        #{fBipBegindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fname != null" >
+        #{fname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.kingcai.entity.BipScoresysparameterExample" resultType="java.lang.Integer" >
+    select count(*) from bip_scoresysparameter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bip_scoresysparameter
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmasterid != null" >
+        fmasterid = #{record.fmasterid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fdocumentstatus != null" >
+        fdocumentstatus = #{record.fdocumentstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fforbidstatus != null" >
+        fforbidstatus = #{record.fforbidstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fnumber != null" >
+        fnumber = #{record.fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcreateorgid != null" >
+        fcreateorgid = #{record.fcreateorgid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fuseorgid != null" >
+        fuseorgid = #{record.fuseorgid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcreatorid != null" >
+        fcreatorid = #{record.fcreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmodifierid != null" >
+        fmodifierid = #{record.fmodifierid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcreatedate != null" >
+        fcreatedate = #{record.fcreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fmodifydate != null" >
+        fmodifydate = #{record.fmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipUserid != null" >
+        f_bip_userid = #{record.fBipUserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipDate != null" >
+        f_bip_date = #{record.fBipDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipUserid1 != null" >
+        f_bip_userid1 = #{record.fBipUserid1,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipDate1 != null" >
+        f_bip_date1 = #{record.fBipDate1,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipAwareoftime != null" >
+        f_bip_awareoftime = #{record.fBipAwareoftime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fBipFieldtime != null" >
+        f_bip_fieldtime = #{record.fBipFieldtime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fBipOvertime != null" >
+        f_bip_overtime = #{record.fBipOvertime,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fBipAwareoftime1 != null" >
+        f_bip_awareoftime1 = #{record.fBipAwareoftime1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fBipArrivetime1 != null" >
+        f_bip_arrivetime1 = #{record.fBipArrivetime1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fBipFieldtime1 != null" >
+        f_bip_fieldtime1 = #{record.fBipFieldtime1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fBipOvertime1 != null" >
+        f_bip_overtime1 = #{record.fBipOvertime1,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fBipArrivetimep != null" >
+        f_bip_arrivetimep = #{record.fBipArrivetimep,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fBipArrivetimecity != null" >
+        f_bip_arrivetimecity = #{record.fBipArrivetimecity,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fBipArrivetimebj != null" >
+        f_bip_arrivetimebj = #{record.fBipArrivetimebj,jdbcType=DECIMAL},
+      </if>
+      <if test="record.fBipBegindate != null" >
+        f_bip_begindate = #{record.fBipBegindate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fname != null" >
+        fname = #{record.fname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bip_scoresysparameter
+    set fid = #{record.fid,jdbcType=INTEGER},
+      fmasterid = #{record.fmasterid,jdbcType=INTEGER},
+      fdocumentstatus = #{record.fdocumentstatus,jdbcType=VARCHAR},
+      fforbidstatus = #{record.fforbidstatus,jdbcType=VARCHAR},
+      fnumber = #{record.fnumber,jdbcType=VARCHAR},
+      fcreateorgid = #{record.fcreateorgid,jdbcType=INTEGER},
+      fuseorgid = #{record.fuseorgid,jdbcType=INTEGER},
+      fcreatorid = #{record.fcreatorid,jdbcType=INTEGER},
+      fmodifierid = #{record.fmodifierid,jdbcType=INTEGER},
+      fcreatedate = #{record.fcreatedate,jdbcType=TIMESTAMP},
+      fmodifydate = #{record.fmodifydate,jdbcType=TIMESTAMP},
+      f_bip_userid = #{record.fBipUserid,jdbcType=INTEGER},
+      f_bip_date = #{record.fBipDate,jdbcType=TIMESTAMP},
+      f_bip_userid1 = #{record.fBipUserid1,jdbcType=INTEGER},
+      f_bip_date1 = #{record.fBipDate1,jdbcType=TIMESTAMP},
+      f_bip_awareoftime = #{record.fBipAwareoftime,jdbcType=DECIMAL},
+      f_bip_fieldtime = #{record.fBipFieldtime,jdbcType=DECIMAL},
+      f_bip_overtime = #{record.fBipOvertime,jdbcType=DECIMAL},
+      f_bip_awareoftime1 = #{record.fBipAwareoftime1,jdbcType=DECIMAL},
+      f_bip_arrivetime1 = #{record.fBipArrivetime1,jdbcType=DECIMAL},
+      f_bip_fieldtime1 = #{record.fBipFieldtime1,jdbcType=DECIMAL},
+      f_bip_overtime1 = #{record.fBipOvertime1,jdbcType=DECIMAL},
+      f_bip_arrivetimep = #{record.fBipArrivetimep,jdbcType=DECIMAL},
+      f_bip_arrivetimecity = #{record.fBipArrivetimecity,jdbcType=DECIMAL},
+      f_bip_arrivetimebj = #{record.fBipArrivetimebj,jdbcType=DECIMAL},
+      f_bip_begindate = #{record.fBipBegindate,jdbcType=TIMESTAMP},
+      fname = #{record.fname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kingcai.dao.BipTTypespetitionsMapper" >
+  <resultMap id="BaseResultMap" type="cn.kingcai.entity.BipTTypespetitions" >
+    <result column="fid" property="fid" jdbcType="INTEGER" />
+    <result column="fmasterid" property="fmasterid" jdbcType="INTEGER" />
+    <result column="fdocumentstatus" property="fdocumentstatus" jdbcType="VARCHAR" />
+    <result column="fforbidstatus" property="fforbidstatus" jdbcType="VARCHAR" />
+    <result column="fnumber" property="fnumber" jdbcType="VARCHAR" />
+    <result column="fcreateorgid" property="fcreateorgid" jdbcType="INTEGER" />
+    <result column="fuseorgid" property="fuseorgid" jdbcType="INTEGER" />
+    <result column="fcreatorid" property="fcreatorid" jdbcType="INTEGER" />
+    <result column="fmodifierid" property="fmodifierid" jdbcType="INTEGER" />
+    <result column="fcreatedate" property="fcreatedate" jdbcType="TIMESTAMP" />
+    <result column="fmodifydate" property="fmodifydate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_numberupper" property="fBipNumberupper" jdbcType="INTEGER" />
+    <result column="f_bip_auditorid" property="fBipAuditorid" jdbcType="INTEGER" />
+    <result column="f_bip_disableid" property="fBipDisableid" jdbcType="INTEGER" />
+    <result column="f_bip_auditordate" property="fBipAuditordate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_disabledate" property="fBipDisabledate" jdbcType="TIMESTAMP" />
+    <result column="fname" property="fname" jdbcType="VARCHAR" />
+  </resultMap>
+  <!-- 查询全部上访类型 -->
+  <select id="selectTypes" resultType="java.util.HashMap">
+  	select fnumber, fname,fdocumentstatus,fforbidstatus from bip_t_typespetitions where fforbidstatus='A'
+  </select>
+  <!-- 删除上访类型 -->
+  <delete id="deleteTypes" parameterType="java.lang.String">
+  	delete from bip_t_typespetitions where fnumber=#{fnumber}
+  </delete>
+  <!-- 增加上访类型 -->
+  <insert id="insert" parameterType="cn.kingcai.entity.BipTTypespetitions" >
+    insert into bip_t_typespetitions (fid, fmasterid, fdocumentstatus, 
+      fforbidstatus, fnumber, fcreateorgid, 
+      fuseorgid, fcreatorid, fmodifierid, 
+      fcreatedate, fmodifydate, f_bip_numberupper, 
+      f_bip_auditorid, f_bip_disableid, f_bip_auditordate, 
+      f_bip_disabledate, fname,fdescription)
+    values (#{fid,jdbcType=INTEGER}, #{fmasterid,jdbcType=INTEGER}, #{fdocumentstatus,jdbcType=VARCHAR}, 
+      #{fforbidstatus,jdbcType=VARCHAR}, #{fnumber,jdbcType=VARCHAR}, #{fcreateorgid,jdbcType=INTEGER}, 
+      #{fuseorgid,jdbcType=INTEGER}, #{fcreatorid,jdbcType=INTEGER}, #{fmodifierid,jdbcType=INTEGER}, 
+      #{fcreatedate,jdbcType=TIMESTAMP}, #{fmodifydate,jdbcType=TIMESTAMP}, #{fBipNumberupper,jdbcType=INTEGER}, 
+      #{fBipAuditorid,jdbcType=INTEGER}, #{fBipDisableid,jdbcType=INTEGER}, #{fBipAuditordate,jdbcType=TIMESTAMP}, 
+      #{fBipDisabledate,jdbcType=TIMESTAMP}, #{fname,jdbcType=VARCHAR},#{FDescription,jdbcType=VARCHAR})
+  </insert>
+  <!-- 更新上访类型 -->
+  <update id="update" parameterType="cn.kingcai.entity.BipTTypespetitions">
+  	 update bip_t_typespetitions
+    <set >
+      <if test="fmasterid != null" >
+        fmasterid = #{fmasterid,jdbcType=INTEGER},
+      </if>
+      <if test="fdocumentstatus != null" >
+        fdocumentstatus = #{fdocumentstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fforbidstatus != null" >
+        fforbidstatus = #{fforbidstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fnumber != null" >
+        fnumber = #{fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreateorgid != null" >
+        fcreateorgid = #{fcreateorgid,jdbcType=INTEGER},
+      </if>
+      <if test="fuseorgid != null" >
+        fuseorgid = #{fuseorgid,jdbcType=INTEGER},
+      </if>
+      <if test="fcreatorid != null" >
+        fcreatorid = #{fcreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="fmodifierid != null" >
+        fmodifierid = #{fmodifierid,jdbcType=INTEGER},
+      </if>
+      <if test="fcreatedate != null" >
+        fcreatedate = #{fcreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifydate != null" >
+        fmodifydate = #{fmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipNumberupper != null" >
+        f_bip_numberupper = #{fBipNumberupper,jdbcType=INTEGER},
+      </if>
+      <if test="fBipAuditorid != null" >
+        f_bip_auditorid = #{fBipAuditorid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipDisableid != null" >
+        f_bip_disableid = #{fBipDisableid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipAuditordate != null" >
+        f_bip_auditordate = #{fBipAuditordate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipDisabledate != null" >
+        f_bip_disabledate = #{fBipDisabledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fname != null" >
+        fname = #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="FDescription != null" >
+        fdescription = #{FDescription,jdbcType=VARCHAR}
+      </if>
+      where fid=#{fid}
+    </set>
+  </update>
+  
+  
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fid, fmasterid, fdocumentstatus, fforbidstatus, fnumber, fcreateorgid, fuseorgid, 
+    fcreatorid, fmodifierid, fcreatedate, fmodifydate, f_bip_numberupper, f_bip_auditorid, 
+    f_bip_disableid, f_bip_auditordate, f_bip_disabledate, fname
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kingcai.entity.BipTTypespetitionsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bip_t_typespetitions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.kingcai.entity.BipTTypespetitionsExample" >
+    delete from bip_t_typespetitions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+
+  <insert id="insertSelective" parameterType="cn.kingcai.entity.BipTTypespetitions" >
+    insert into bip_t_typespetitions
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fmasterid != null" >
+        fmasterid,
+      </if>
+      <if test="fdocumentstatus != null" >
+        fdocumentstatus,
+      </if>
+      <if test="fforbidstatus != null" >
+        fforbidstatus,
+      </if>
+      <if test="fnumber != null" >
+        fnumber,
+      </if>
+      <if test="fcreateorgid != null" >
+        fcreateorgid,
+      </if>
+      <if test="fuseorgid != null" >
+        fuseorgid,
+      </if>
+      <if test="fcreatorid != null" >
+        fcreatorid,
+      </if>
+      <if test="fmodifierid != null" >
+        fmodifierid,
+      </if>
+      <if test="fcreatedate != null" >
+        fcreatedate,
+      </if>
+      <if test="fmodifydate != null" >
+        fmodifydate,
+      </if>
+      <if test="fBipNumberupper != null" >
+        f_bip_numberupper,
+      </if>
+      <if test="fBipAuditorid != null" >
+        f_bip_auditorid,
+      </if>
+      <if test="fBipDisableid != null" >
+        f_bip_disableid,
+      </if>
+      <if test="fBipAuditordate != null" >
+        f_bip_auditordate,
+      </if>
+      <if test="fBipDisabledate != null" >
+        f_bip_disabledate,
+      </if>
+      <if test="fname != null" >
+        fname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=INTEGER},
+      </if>
+      <if test="fmasterid != null" >
+        #{fmasterid,jdbcType=INTEGER},
+      </if>
+      <if test="fdocumentstatus != null" >
+        #{fdocumentstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fforbidstatus != null" >
+        #{fforbidstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fnumber != null" >
+        #{fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreateorgid != null" >
+        #{fcreateorgid,jdbcType=INTEGER},
+      </if>
+      <if test="fuseorgid != null" >
+        #{fuseorgid,jdbcType=INTEGER},
+      </if>
+      <if test="fcreatorid != null" >
+        #{fcreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="fmodifierid != null" >
+        #{fmodifierid,jdbcType=INTEGER},
+      </if>
+      <if test="fcreatedate != null" >
+        #{fcreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifydate != null" >
+        #{fmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipNumberupper != null" >
+        #{fBipNumberupper,jdbcType=INTEGER},
+      </if>
+      <if test="fBipAuditorid != null" >
+        #{fBipAuditorid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipDisableid != null" >
+        #{fBipDisableid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipAuditordate != null" >
+        #{fBipAuditordate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipDisabledate != null" >
+        #{fBipDisabledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fname != null" >
+        #{fname,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.kingcai.entity.BipTTypespetitionsExample" resultType="java.lang.Integer" >
+    select count(*) from bip_t_typespetitions
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bip_t_typespetitions
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmasterid != null" >
+        fmasterid = #{record.fmasterid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fdocumentstatus != null" >
+        fdocumentstatus = #{record.fdocumentstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fforbidstatus != null" >
+        fforbidstatus = #{record.fforbidstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fnumber != null" >
+        fnumber = #{record.fnumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcreateorgid != null" >
+        fcreateorgid = #{record.fcreateorgid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fuseorgid != null" >
+        fuseorgid = #{record.fuseorgid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcreatorid != null" >
+        fcreatorid = #{record.fcreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmodifierid != null" >
+        fmodifierid = #{record.fmodifierid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcreatedate != null" >
+        fcreatedate = #{record.fcreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fmodifydate != null" >
+        fmodifydate = #{record.fmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipNumberupper != null" >
+        f_bip_numberupper = #{record.fBipNumberupper,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipAuditorid != null" >
+        f_bip_auditorid = #{record.fBipAuditorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipDisableid != null" >
+        f_bip_disableid = #{record.fBipDisableid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipAuditordate != null" >
+        f_bip_auditordate = #{record.fBipAuditordate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipDisabledate != null" >
+        f_bip_disabledate = #{record.fBipDisabledate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fname != null" >
+        fname = #{record.fname,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bip_t_typespetitions
+    set fid = #{record.fid,jdbcType=INTEGER},
+      fmasterid = #{record.fmasterid,jdbcType=INTEGER},
+      fdocumentstatus = #{record.fdocumentstatus,jdbcType=VARCHAR},
+      fforbidstatus = #{record.fforbidstatus,jdbcType=VARCHAR},
+      fnumber = #{record.fnumber,jdbcType=VARCHAR},
+      fcreateorgid = #{record.fcreateorgid,jdbcType=INTEGER},
+      fuseorgid = #{record.fuseorgid,jdbcType=INTEGER},
+      fcreatorid = #{record.fcreatorid,jdbcType=INTEGER},
+      fmodifierid = #{record.fmodifierid,jdbcType=INTEGER},
+      fcreatedate = #{record.fcreatedate,jdbcType=TIMESTAMP},
+      fmodifydate = #{record.fmodifydate,jdbcType=TIMESTAMP},
+      f_bip_numberupper = #{record.fBipNumberupper,jdbcType=INTEGER},
+      f_bip_auditorid = #{record.fBipAuditorid,jdbcType=INTEGER},
+      f_bip_disableid = #{record.fBipDisableid,jdbcType=INTEGER},
+      f_bip_auditordate = #{record.fBipAuditordate,jdbcType=TIMESTAMP},
+      f_bip_disabledate = #{record.fBipDisabledate,jdbcType=TIMESTAMP},
+      fname = #{record.fname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

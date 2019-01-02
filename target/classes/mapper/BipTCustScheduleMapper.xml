@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kingcai.dao.BipTCustScheduleMapper" >
+  <resultMap id="BaseResultMap" type="cn.kingcai.entity.BipTCustSchedule" >
+    <result column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="fbillno" property="fbillno" jdbcType="VARCHAR" />
+    <result column="fdocumentstatus" property="fdocumentstatus" jdbcType="CHAR" />
+    <result column="f_bip_startdatetime" property="fBipStartdatetime" jdbcType="TIMESTAMP" />
+    <result column="f_bip_enddatetime" property="fBipEnddatetime" jdbcType="TIMESTAMP" />
+    <result column="f_bip_reminddatetime" property="fBipReminddatetime" jdbcType="TIMESTAMP" />
+    <result column="f_bip_theme" property="fBipTheme" jdbcType="VARCHAR" />
+    <result column="f_bip_type" property="fBipType" jdbcType="VARCHAR" />
+    <result column="f_bip_importance" property="fBipImportance" jdbcType="VARCHAR" />
+    <result column="f_bip_participants" property="fBipParticipants" jdbcType="VARCHAR" />
+    <result column="f_bip_needfile" property="fBipNeedfile" jdbcType="VARCHAR" />
+    <result column="f_bip_finish" property="fBipFinish" jdbcType="VARCHAR" />
+    <result column="f_bip_details" property="fBipDetails" jdbcType="VARCHAR" />
+    <result column="fcreatorid" property="fcreatorid" jdbcType="INTEGER" />
+    <result column="fcreatedate" property="fcreatedate" jdbcType="TIMESTAMP" />
+    <result column="fmodifierid" property="fmodifierid" jdbcType="INTEGER" />
+    <result column="fmodifydate" property="fmodifydate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_checker" property="fBipChecker" jdbcType="INTEGER" />
+    <result column="f_bip_checktime" property="fBipChecktime" jdbcType="TIMESTAMP" />
+    <result column="f_bip_isfirstremind" property="fBipIsfirstremind" jdbcType="CHAR" />
+    <result column="f_bip_isoverremind" property="fBipIsoverremind" jdbcType="CHAR" />
+    <result column="f_bip_billcreater" property="fBipBillcreater" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fid, fbillno, fdocumentstatus, f_bip_startdatetime, f_bip_enddatetime, f_bip_reminddatetime, 
+    f_bip_theme, f_bip_type, f_bip_importance, f_bip_participants, f_bip_needfile, f_bip_finish, 
+    f_bip_details, fcreatorid, fcreatedate, fmodifierid, fmodifydate, f_bip_checker, 
+    f_bip_checktime, f_bip_isfirstremind, f_bip_isoverremind, f_bip_billcreater
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kingcai.entity.BipTCustScheduleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bip_t_cust_schedule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.kingcai.entity.BipTCustScheduleExample" >
+    delete from bip_t_cust_schedule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.kingcai.entity.BipTCustSchedule" >
+    insert into bip_t_cust_schedule (fid, fbillno, fdocumentstatus, 
+      f_bip_startdatetime, f_bip_enddatetime, 
+      f_bip_reminddatetime, f_bip_theme, f_bip_type, 
+      f_bip_importance, f_bip_participants, f_bip_needfile, 
+      f_bip_finish, f_bip_details, fcreatorid, 
+      fcreatedate, fmodifierid, fmodifydate, 
+      f_bip_checker, f_bip_checktime, f_bip_isfirstremind, 
+      f_bip_isoverremind, f_bip_billcreater)
+    values (#{fid,jdbcType=BIGINT}, #{fbillno,jdbcType=VARCHAR}, #{fdocumentstatus,jdbcType=CHAR}, 
+      #{fBipStartdatetime,jdbcType=TIMESTAMP}, #{fBipEnddatetime,jdbcType=TIMESTAMP}, 
+      #{fBipReminddatetime,jdbcType=TIMESTAMP}, #{fBipTheme,jdbcType=VARCHAR}, #{fBipType,jdbcType=VARCHAR}, 
+      #{fBipImportance,jdbcType=VARCHAR}, #{fBipParticipants,jdbcType=VARCHAR}, #{fBipNeedfile,jdbcType=VARCHAR}, 
+      #{fBipFinish,jdbcType=VARCHAR}, #{fBipDetails,jdbcType=VARCHAR}, #{fcreatorid,jdbcType=INTEGER}, 
+      #{fcreatedate,jdbcType=TIMESTAMP}, #{fmodifierid,jdbcType=INTEGER}, #{fmodifydate,jdbcType=TIMESTAMP}, 
+      #{fBipChecker,jdbcType=INTEGER}, #{fBipChecktime,jdbcType=TIMESTAMP}, #{fBipIsfirstremind,jdbcType=CHAR}, 
+      #{fBipIsoverremind,jdbcType=CHAR}, #{fBipBillcreater,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.kingcai.entity.BipTCustSchedule" >
+    insert into bip_t_cust_schedule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fbillno != null" >
+        fbillno,
+      </if>
+      <if test="fdocumentstatus != null" >
+        fdocumentstatus,
+      </if>
+      <if test="fBipStartdatetime != null" >
+        f_bip_startdatetime,
+      </if>
+      <if test="fBipEnddatetime != null" >
+        f_bip_enddatetime,
+      </if>
+      <if test="fBipReminddatetime != null" >
+        f_bip_reminddatetime,
+      </if>
+      <if test="fBipTheme != null" >
+        f_bip_theme,
+      </if>
+      <if test="fBipType != null" >
+        f_bip_type,
+      </if>
+      <if test="fBipImportance != null" >
+        f_bip_importance,
+      </if>
+      <if test="fBipParticipants != null" >
+        f_bip_participants,
+      </if>
+      <if test="fBipNeedfile != null" >
+        f_bip_needfile,
+      </if>
+      <if test="fBipFinish != null" >
+        f_bip_finish,
+      </if>
+      <if test="fBipDetails != null" >
+        f_bip_details,
+      </if>
+      <if test="fcreatorid != null" >
+        fcreatorid,
+      </if>
+      <if test="fcreatedate != null" >
+        fcreatedate,
+      </if>
+      <if test="fmodifierid != null" >
+        fmodifierid,
+      </if>
+      <if test="fmodifydate != null" >
+        fmodifydate,
+      </if>
+      <if test="fBipChecker != null" >
+        f_bip_checker,
+      </if>
+      <if test="fBipChecktime != null" >
+        f_bip_checktime,
+      </if>
+      <if test="fBipIsfirstremind != null" >
+        f_bip_isfirstremind,
+      </if>
+      <if test="fBipIsoverremind != null" >
+        f_bip_isoverremind,
+      </if>
+      <if test="fBipBillcreater != null" >
+        f_bip_billcreater,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="fbillno != null" >
+        #{fbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="fdocumentstatus != null" >
+        #{fdocumentstatus,jdbcType=CHAR},
+      </if>
+      <if test="fBipStartdatetime != null" >
+        #{fBipStartdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipEnddatetime != null" >
+        #{fBipEnddatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipReminddatetime != null" >
+        #{fBipReminddatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipTheme != null" >
+        #{fBipTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipType != null" >
+        #{fBipType,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipImportance != null" >
+        #{fBipImportance,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipParticipants != null" >
+        #{fBipParticipants,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipNeedfile != null" >
+        #{fBipNeedfile,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipFinish != null" >
+        #{fBipFinish,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipDetails != null" >
+        #{fBipDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreatorid != null" >
+        #{fcreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="fcreatedate != null" >
+        #{fcreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifierid != null" >
+        #{fmodifierid,jdbcType=INTEGER},
+      </if>
+      <if test="fmodifydate != null" >
+        #{fmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipChecker != null" >
+        #{fBipChecker,jdbcType=INTEGER},
+      </if>
+      <if test="fBipChecktime != null" >
+        #{fBipChecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipIsfirstremind != null" >
+        #{fBipIsfirstremind,jdbcType=CHAR},
+      </if>
+      <if test="fBipIsoverremind != null" >
+        #{fBipIsoverremind,jdbcType=CHAR},
+      </if>
+      <if test="fBipBillcreater != null" >
+        #{fBipBillcreater,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.kingcai.entity.BipTCustScheduleExample" resultType="java.lang.Integer" >
+    select count(*) from bip_t_cust_schedule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bip_t_cust_schedule
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fbillno != null" >
+        fbillno = #{record.fbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fdocumentstatus != null" >
+        fdocumentstatus = #{record.fdocumentstatus,jdbcType=CHAR},
+      </if>
+      <if test="record.fBipStartdatetime != null" >
+        f_bip_startdatetime = #{record.fBipStartdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipEnddatetime != null" >
+        f_bip_enddatetime = #{record.fBipEnddatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipReminddatetime != null" >
+        f_bip_reminddatetime = #{record.fBipReminddatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipTheme != null" >
+        f_bip_theme = #{record.fBipTheme,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipType != null" >
+        f_bip_type = #{record.fBipType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipImportance != null" >
+        f_bip_importance = #{record.fBipImportance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipParticipants != null" >
+        f_bip_participants = #{record.fBipParticipants,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipNeedfile != null" >
+        f_bip_needfile = #{record.fBipNeedfile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipFinish != null" >
+        f_bip_finish = #{record.fBipFinish,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipDetails != null" >
+        f_bip_details = #{record.fBipDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fcreatorid != null" >
+        fcreatorid = #{record.fcreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcreatedate != null" >
+        fcreatedate = #{record.fcreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fmodifierid != null" >
+        fmodifierid = #{record.fmodifierid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmodifydate != null" >
+        fmodifydate = #{record.fmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipChecker != null" >
+        f_bip_checker = #{record.fBipChecker,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipChecktime != null" >
+        f_bip_checktime = #{record.fBipChecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipIsfirstremind != null" >
+        f_bip_isfirstremind = #{record.fBipIsfirstremind,jdbcType=CHAR},
+      </if>
+      <if test="record.fBipIsoverremind != null" >
+        f_bip_isoverremind = #{record.fBipIsoverremind,jdbcType=CHAR},
+      </if>
+      <if test="record.fBipBillcreater != null" >
+        f_bip_billcreater = #{record.fBipBillcreater,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bip_t_cust_schedule
+    set fid = #{record.fid,jdbcType=BIGINT},
+      fbillno = #{record.fbillno,jdbcType=VARCHAR},
+      fdocumentstatus = #{record.fdocumentstatus,jdbcType=CHAR},
+      f_bip_startdatetime = #{record.fBipStartdatetime,jdbcType=TIMESTAMP},
+      f_bip_enddatetime = #{record.fBipEnddatetime,jdbcType=TIMESTAMP},
+      f_bip_reminddatetime = #{record.fBipReminddatetime,jdbcType=TIMESTAMP},
+      f_bip_theme = #{record.fBipTheme,jdbcType=VARCHAR},
+      f_bip_type = #{record.fBipType,jdbcType=VARCHAR},
+      f_bip_importance = #{record.fBipImportance,jdbcType=VARCHAR},
+      f_bip_participants = #{record.fBipParticipants,jdbcType=VARCHAR},
+      f_bip_needfile = #{record.fBipNeedfile,jdbcType=VARCHAR},
+      f_bip_finish = #{record.fBipFinish,jdbcType=VARCHAR},
+      f_bip_details = #{record.fBipDetails,jdbcType=VARCHAR},
+      fcreatorid = #{record.fcreatorid,jdbcType=INTEGER},
+      fcreatedate = #{record.fcreatedate,jdbcType=TIMESTAMP},
+      fmodifierid = #{record.fmodifierid,jdbcType=INTEGER},
+      fmodifydate = #{record.fmodifydate,jdbcType=TIMESTAMP},
+      f_bip_checker = #{record.fBipChecker,jdbcType=INTEGER},
+      f_bip_checktime = #{record.fBipChecktime,jdbcType=TIMESTAMP},
+      f_bip_isfirstremind = #{record.fBipIsfirstremind,jdbcType=CHAR},
+      f_bip_isoverremind = #{record.fBipIsoverremind,jdbcType=CHAR},
+      f_bip_billcreater = #{record.fBipBillcreater,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

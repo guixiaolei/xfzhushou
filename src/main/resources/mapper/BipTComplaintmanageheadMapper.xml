@@ -1,0 +1,1298 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kingcai.dao.BipTComplaintmanageheadMapper" >
+  <!-- <resultMap id="BaseResultMap" type="cn.kingcai.entity.BipTComplaintmanagehead" >
+    <result column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="fbillno" property="fbillno" jdbcType="VARCHAR" />
+    <result column="fdocumentstatus" property="fdocumentstatus" jdbcType="CHAR" />
+    <result column="f_bip_petitionernum" property="fBipPetitionernum" jdbcType="INTEGER" />
+    <result column="f_bip_governanceunit" property="fBipGovernanceunit" jdbcType="INTEGER" />
+    <result column="f_bip_thirdclassify" property="fBipThirdclassify" jdbcType="VARCHAR" />
+    <result column="f_bip_firstclassify" property="fBipFirstclassify" jdbcType="VARCHAR" />
+    <result column="f_bip_eventdetails" property="fBipEventdetails" jdbcType="VARCHAR" />
+    <result column="f_bip_petitionerid" property="fBipPetitionerid" jdbcType="VARCHAR" />
+    <result column="f_bip_petitionertel" property="fBipPetitionertel" jdbcType="VARCHAR" />
+    <result column="f_bip_petitiontype" property="fBipPetitiontype" jdbcType="INTEGER" />
+    <result column="f_bip_secondclassify" property="fBipSecondclassify" jdbcType="VARCHAR" />
+    <result column="f_bip_petitioner" property="fBipPetitioner" jdbcType="VARCHAR" />
+    <result column="f_bip_location" property="fBipLocation" jdbcType="VARCHAR" />
+    <result column="f_bip_handledresult" property="fBipHandledresult" jdbcType="VARCHAR" />
+    <result column="f_bip_eventhandledresult" property="fBipEventhandledresult" jdbcType="VARCHAR" />
+    <result column="f_bip_creatername" property="fBipCreatername" jdbcType="INTEGER" />
+    <result column="f_bip_checkdate" property="fBipCheckdate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_createdate" property="fBipCreatedate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_modifydate" property="fBipModifydate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_modifiername" property="fBipModifiername" jdbcType="INTEGER" />
+    <result column="f_bip_checkername" property="fBipCheckername" jdbcType="INTEGER" />
+    <result column="f_bip_sourceid" property="fBipSourceid" jdbcType="VARCHAR" />
+    <result column="f_bip_awareofperson" property="fBipAwareofperson" jdbcType="INTEGER" />
+    <result column="f_bip_fieldhandler" property="fBipFieldhandler" jdbcType="INTEGER" />
+    <result column="f_bip_fieldconfirmer" property="fBipFieldconfirmer" jdbcType="INTEGER" />
+    <result column="f_bip_eventhandler" property="fBipEventhandler" jdbcType="INTEGER" />
+    <result column="f_bip_eventconfirmer" property="fBipEventconfirmer" jdbcType="INTEGER" />
+    <result column="f_bip_awareoftime" property="fBipAwareoftime" jdbcType="TIMESTAMP" />
+    <result column="f_bip_arrivaltime" property="fBipArrivaltime" jdbcType="TIMESTAMP" />
+    <result column="f_bip_fieldhandledtime" property="fBipFieldhandledtime" jdbcType="TIMESTAMP" />
+    <result column="f_bip_eventhandledtime" property="fBipEventhandledtime" jdbcType="TIMESTAMP" />
+    <result column="f_bip_ischanged" property="fBipIschanged" jdbcType="CHAR" />
+    <result column="f_bip_integer" property="fBipInteger" jdbcType="INTEGER" />
+    <result column="f_bip_soursedown" property="fBipSoursedown" jdbcType="INTEGER" />
+    <result column="f_bip_accept" property="fBipAccept" jdbcType="INTEGER" />
+    <result column="fbillstatus" property="fbillstatus" jdbcType="CHAR" />
+    <result column="f_bip_orgid" property="fBipOrgid" jdbcType="INTEGER" />
+    <result column="f_bip_assistant" property="fBipAssistant" jdbcType="VARCHAR" />
+    <result column="f_bip_integer1" property="fBipInteger1" jdbcType="INTEGER" />
+    <result column="f_bip_arrivecheker" property="fBipArrivecheker" jdbcType="INTEGER" />
+    <result column="f_bip_arrivechecktime" property="fBipArrivechecktime" jdbcType="TIMESTAMP" />
+    <result column="f_bip_dealoverperson" property="fBipDealoverperson" jdbcType="INTEGER" />
+    <result column="f_bip_overchecktime" property="fBipOverchecktime" jdbcType="TIMESTAMP" />
+    <result column="f_bip_fieldchecktime" property="fBipFieldchecktime" jdbcType="TIMESTAMP" />
+    <result column="f_bip_resultdiscription" property="fBipResultdiscription" jdbcType="VARCHAR" />
+    <result column="f_bip_filedresultdiscription" property="fBipFiledresultdiscription" jdbcType="VARCHAR" />
+    <result column="f_bip_isregister" property="fBipIsregister" jdbcType="CHAR" />
+    <result column="f_bip_upfieldnum" property="fBipUpfieldnum" jdbcType="VARCHAR" />
+    <result column="f_bip_isoverregister" property="fBipIsoverregister" jdbcType="CHAR" />
+    <result column="f_bip_politicaloutlook" property="fBipPoliticaloutlook" jdbcType="VARCHAR" />
+    <result column="f_bip_isfirstsendmessage" property="fBipIsfirstsendmessage" jdbcType="CHAR" />
+    <result column="f_bip_ischangesendmessage" property="fBipIschangesendmessage" jdbcType="CHAR" />
+    <result column="f_bip_synchrointeger" property="fBipSynchrointeger" jdbcType="INTEGER" /> 
+  </resultMap>-->
+  <!-- 查询信访处理列表 -->
+  <select id="selectHandleList" resultType="java.util.HashMap">
+  	SELECT
+	fbillno,
+	F_BIP_Petitioner,
+	( SELECT fname FROM bip_t_typespetitions WHERE fid = F_BIP_PetitionType ) AS PetitionType,
+	F_BIP_PetitionerNum,
+	F_BIP_PetitionerTel,
+	( SELECT fdatavalue FROM v_firstclassify WHERE fentryid = f_bip_firstclassify ) AS firstclass,
+	( SELECT fdatavalue FROM v_secondclassify WHERE fentryid = F_BIP_SecondClassify ) AS secondclass,
+	( SELECT fdatavalue FROM v_thirdclassify WHERE fentryid = F_BIP_ThirdClassify ) AS thirdclass,
+	F_BIP_EVENTDETAILS,
+	( SELECT fname FROM bip_t_poweraffairs WHERE fid = F_BIP_GOVERNANCEUNIT ) AS poweraffairs,
+	( SELECT username FROM t_user u LEFT JOIN bip_t_poweraffairs p ON u.id = p.f_bip_director WHERE p.fid = F_BIP_GOVERNANCEUNIT ) as director,
+	(select username from t_user where id = F_BIP_CREATERNAME) as createName,
+	F_BIP_CREATEDATE,
+	F_BIP_EventHandledResult 
+FROM
+	bip_t_complaintmanagehead
+  </select>
+  
+  <!-- 信访处理单显示信息 -->
+  <select id="showData" resultType="java.util.HashMap">
+  	select * from bip_t_complaintmanagehead where fbillno=#{billno}
+  </select>
+ 
+  <!-- 保存到信访处理单 -->
+  <insert id="saveToPetitionHandle" parameterType="cn.kingcai.entity.BipTComplaintmanagehead">
+  	insert into bip_t_complaintmanagehead
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fbillno != null" >
+        fbillno,
+      </if>
+      <if test="fdocumentstatus != null" >
+        fdocumentstatus,
+      </if>
+      <if test="fBipPetitionersnumber != null" >
+        f_bip_petitionernum,
+      </if>
+      <if test="fBipPoweraffairs != null" >
+        f_bip_governanceunit,
+      </if>
+      <if test="fBipThirdclassify != null" >
+        f_bip_thirdclassify,
+      </if>
+      <if test="fBipFirstclassify != null" >
+        f_bip_firstclassify,
+      </if>
+      <if test="fBipRemark != null" >
+        f_bip_eventdetails,
+      </if>
+      <if test="fBipComplainantsnumerid != null" >
+        f_bip_petitionerid,
+      </if>
+      <if test="fBipPetitionerphone != null" >
+        f_bip_petitionertel,
+      </if>
+      <if test="fBipPetitiontype != null" >
+        f_bip_petitiontype,
+      </if>
+      <if test="fBipSecondclassify != null" >
+        f_bip_secondclassify,
+      </if>
+      <if test="fBipPetitionername != null" >
+        f_bip_petitioner,
+      </if>
+      <if test="fBipLocation != null" >
+        f_bip_location,
+      </if>
+      <if test="fBipHandledresult != null" >
+        f_bip_handledresult,
+      </if>
+      <if test="fBipEventhandledresult != null" >
+        f_bip_eventhandledresult,
+      </if>
+      <if test="fcreatorid != null" >
+        f_bip_creatername,
+      </if>
+      <if test="fBipCheckdate != null" >
+        f_bip_checkdate,
+      </if>
+      <if test="fcreatedate != null" >
+        f_bip_createdate,
+      </if>
+      <if test="fmodifydate != null" >
+        f_bip_modifydate,
+      </if>
+      <if test="fmodifierid != null" >
+        f_bip_modifiername,
+      </if>
+      <if test="fBipUserid != null" >
+        f_bip_checkername,
+      </if>
+      <if test="fBipSourceid != null" >
+        f_bip_sourceid,
+      </if>
+      <if test="fBipAwareofperson != null" >
+        f_bip_awareofperson,
+      </if>
+      <if test="fBipFieldhandler != null" >
+        f_bip_fieldhandler,
+      </if>
+      <if test="fBipFieldconfirmer != null" >
+        f_bip_fieldconfirmer,
+      </if>
+      <if test="fBipEventhandler != null" >
+        f_bip_eventhandler,
+      </if>
+      <if test="fBipEventconfirmer != null" >
+        f_bip_eventconfirmer,
+      </if>
+      <if test="fBipAwareoftime != null" >
+        f_bip_awareoftime,
+      </if>
+      <if test="fBipArrivaltime != null" >
+        f_bip_arrivaltime,
+      </if>
+      <if test="fBipFieldhandledtime != null" >
+        f_bip_fieldhandledtime,
+      </if>
+      <if test="fBipEventhandledtime != null" >
+        f_bip_eventhandledtime,
+      </if>
+      <if test="fBipIschanged != null" >
+        f_bip_ischanged,
+      </if>
+      <if test="fBipInteger != null" >
+        f_bip_integer,
+      </if>
+      <if test="fBipSoursedown != null" >
+        f_bip_soursedown,
+      </if>
+      <if test="fBipAccept != null" >
+        f_bip_accept,
+      </if>
+      <if test="fbillstatus != null" >
+        fbillstatus,
+      </if>
+      <if test="fBipOrgid != null" >
+        f_bip_orgid,
+      </if>
+      <if test="fBipAssistant != null" >
+        f_bip_assistant,
+      </if>
+      <if test="fBipInteger1 != null" >
+        f_bip_integer1,
+      </if>
+      <if test="fBipArrivecheker != null" >
+        f_bip_arrivecheker,
+      </if>
+      <if test="fBipArrivechecktime != null" >
+        f_bip_arrivechecktime,
+      </if>
+      <if test="fBipDealoverperson != null" >
+        f_bip_dealoverperson,
+      </if>
+      <if test="fBipOverchecktime != null" >
+        f_bip_overchecktime,
+      </if>
+      <if test="fBipFieldchecktime != null" >
+        f_bip_fieldchecktime,
+      </if>
+      <if test="fBipResultdiscription != null" >
+        f_bip_resultdiscription,
+      </if>
+      <if test="fBipFiledresultdiscription != null" >
+        f_bip_filedresultdiscription,
+      </if>
+      <if test="fBipIsregister != null" >
+        f_bip_isregister,
+      </if>
+      <if test="fBipUpfieldnum != null" >
+        f_bip_upfieldnum,
+      </if>
+      <if test="fBipIsoverregister != null" >
+        f_bip_isoverregister,
+      </if>
+      <if test="fBipPoliticaloutlook != null" >
+        f_bip_politicaloutlook,
+      </if>
+      <if test="fBipIsfirstsendmessage != null" >
+        f_bip_isfirstsendmessage,
+      </if>
+      <if test="fBipIschangesendmessage != null" >
+        f_bip_ischangesendmessage,
+      </if>
+      <if test="fBipSynchrointeger != null" >
+        f_bip_synchrointeger,
+      </if>
+      <if test="FBIPRemarks != null" >
+      	remarks
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="fbillno != null" >
+        #{fbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="fdocumentstatus != null" >
+        #{fdocumentstatus,jdbcType=CHAR},
+      </if>
+      <if test="fBipPetitionersnumber != null" >
+        #{fBipPetitionersnumber,jdbcType=INTEGER},
+      </if>
+      <if test="fBipPoweraffairs != null" >
+        #{fBipPoweraffairs,jdbcType=INTEGER},
+      </if>
+      <if test="fBipThirdclassify != null" >
+        #{fBipThirdclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipFirstclassify != null" >
+        #{fBipFirstclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipRemark != null" >
+        #{fBipRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipComplainantsnumerid != null" >
+        #{fBipComplainantsnumerid,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPetitionerphone != null" >
+        #{fBipPetitionerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPetitiontype != null" >
+        #{fBipPetitiontype,jdbcType=INTEGER},
+      </if>
+      <if test="fBipSecondclassify != null" >
+        #{fBipSecondclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPetitionername != null" >
+        #{fBipPetitionername,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipLocation != null" >
+        #{fBipLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipHandledresult != null" >
+        #{fBipHandledresult,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipEventhandledresult != null" >
+        #{fBipEventhandledresult,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreatorid != null" >
+        #{fcreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipCheckdate != null" >
+        #{fBipCheckdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreatedate != null" >
+        #{fcreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifydate != null" >
+        #{fmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifierid != null" >
+        #{fmodifierid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipUserid != null" >
+        #{fBipUserid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipSourceid != null" >
+        #{fBipSourceid,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipAwareofperson != null" >
+        #{fBipAwareofperson,jdbcType=INTEGER},
+      </if>
+      <if test="fBipFieldhandler != null" >
+        #{fBipFieldhandler,jdbcType=INTEGER},
+      </if>
+      <if test="fBipFieldconfirmer != null" >
+        #{fBipFieldconfirmer,jdbcType=INTEGER},
+      </if>
+      <if test="fBipEventhandler != null" >
+        #{fBipEventhandler,jdbcType=INTEGER},
+      </if>
+      <if test="fBipEventconfirmer != null" >
+        #{fBipEventconfirmer,jdbcType=INTEGER},
+      </if>
+      <if test="fBipAwareoftime != null" >
+        #{fBipAwareoftime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipArrivaltime != null" >
+        #{fBipArrivaltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipFieldhandledtime != null" >
+        #{fBipFieldhandledtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipEventhandledtime != null" >
+        #{fBipEventhandledtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipIschanged != null" >
+        #{fBipIschanged,jdbcType=CHAR},
+      </if>
+      <if test="fBipInteger != null" >
+        #{fBipInteger,jdbcType=INTEGER},
+      </if>
+      <if test="fBipSoursedown != null" >
+        #{fBipSoursedown,jdbcType=INTEGER},
+      </if>
+      <if test="fBipAccept != null" >
+        #{fBipAccept,jdbcType=INTEGER},
+      </if>
+      <if test="fbillstatus != null" >
+        #{fbillstatus,jdbcType=CHAR},
+      </if>
+      <if test="fBipOrgid != null" >
+        #{fBipOrgid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipAssistant != null" >
+        #{fBipAssistant,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipInteger1 != null" >
+        #{fBipInteger1,jdbcType=INTEGER},
+      </if>
+      <if test="fBipArrivecheker != null" >
+        #{fBipArrivecheker,jdbcType=INTEGER},
+      </if>
+      <if test="fBipArrivechecktime != null" >
+        #{fBipArrivechecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipDealoverperson != null" >
+        #{fBipDealoverperson,jdbcType=INTEGER},
+      </if>
+      <if test="fBipOverchecktime != null" >
+        #{fBipOverchecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipFieldchecktime != null" >
+        #{fBipFieldchecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipResultdiscription != null" >
+        #{fBipResultdiscription,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipFiledresultdiscription != null" >
+        #{fBipFiledresultdiscription,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipIsregister != null" >
+        #{fBipIsregister,jdbcType=CHAR},
+      </if>
+      <if test="fBipUpfieldnum != null" >
+        #{fBipUpfieldnum,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipIsoverregister != null" >
+        #{fBipIsoverregister,jdbcType=CHAR},
+      </if>
+      <if test="fBipPoliticaloutlook != null" >
+        #{fBipPoliticaloutlook,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipIsfirstsendmessage != null" >
+        #{fBipIsfirstsendmessage,jdbcType=CHAR},
+      </if>
+      <if test="fBipIschangesendmessage != null" >
+        #{fBipIschangesendmessage,jdbcType=CHAR},
+      </if>
+      <if test="fBipSynchrointeger != null" >
+        #{fBipSynchrointeger,jdbcType=INTEGER},
+      </if>
+      <if test="FBIPRemarks != null" >
+        #{FBIPRemarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 更新信息 -->
+  <update id="updateLearned">
+  	update bip_t_complaintmanagehead
+    <set >
+      <if test="fdocumentstatus != null" >
+        fdocumentstatus = #{fdocumentstatus,jdbcType=CHAR},
+      </if>
+      <if test="fBipPetitionersnumber != null" >
+        f_bip_petitionernum = #{fBipPetitionersnumber,jdbcType=INTEGER},
+      </if>
+      <if test="fBipPoweraffairs != null" >
+        f_bip_governanceunit = #{fBipPoweraffairs,jdbcType=INTEGER},
+      </if>
+      <if test="fBipThirdclassify != null" >
+        f_bip_thirdclassify = #{fBipThirdclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipFirstclassify != null" >
+        f_bip_firstclassify = #{fBipFirstclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipRemark != null" >
+        f_bip_eventdetails = #{fBipRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipComplainantsnumerid != null" >
+        f_bip_petitionerid = #{fBipComplainantsnumerid,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPetitionerphone != null" >
+        f_bip_petitionertel = #{fBipPetitionerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPetitiontype != null" >
+        f_bip_petitiontype = #{fBipPetitiontype,jdbcType=INTEGER},
+      </if>
+      <if test="fBipSecondclassify != null" >
+        f_bip_secondclassify = #{fBipSecondclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPetitionername != null" >
+        f_bip_petitioner = #{fBipPetitionername,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipLocation != null" >
+        f_bip_location = #{fBipLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipHandledresult != null" >
+        f_bip_handledresult = #{fBipHandledresult,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipEventhandledresult != null" >
+        f_bip_eventhandledresult = #{fBipEventhandledresult,jdbcType=VARCHAR},
+      </if>
+      <if test="fcreatorid != null" >
+        f_bip_creatername = #{fcreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipCheckdate != null" >
+        f_bip_checkdate = #{fBipCheckdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreatedate != null" >
+        f_bip_createdate = #{fcreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifydate != null" >
+        f_bip_modifydate = #{fmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifierid != null" >
+        f_bip_modifiername = #{fmodifierid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipUserid != null" >
+        f_bip_checkername = #{fBipUserid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipSourceid != null" >
+        f_bip_sourceid = #{fBipSourceid,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipAwareofperson != null" >
+        f_bip_awareofperson = #{fBipAwareofperson,jdbcType=INTEGER},
+      </if>
+      <if test="fBipFieldhandler != null" >
+        f_bip_fieldhandler = #{fBipFieldhandler,jdbcType=INTEGER},
+      </if>
+      <if test="fBipFieldconfirmer != null" >
+        f_bip_fieldconfirmer = #{fBipFieldconfirmer,jdbcType=INTEGER},
+      </if>
+      <if test="fBipEventhandler != null" >
+        f_bip_eventhandler = #{fBipEventhandler,jdbcType=INTEGER},
+      </if>
+      <if test="fBipEventconfirmer != null" >
+        f_bip_eventconfirmer = #{fBipEventconfirmer,jdbcType=INTEGER},
+      </if>
+      <if test="fBipAwareoftime != null" >
+        f_bip_awareoftime = #{fBipAwareoftime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipArrivaltime != null" >
+        f_bip_arrivaltime = #{fBipArrivaltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipFieldhandledtime != null" >
+        f_bip_fieldhandledtime = #{fBipFieldhandledtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipEventhandledtime != null" >
+        f_bip_eventhandledtime = #{fBipEventhandledtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipIschanged != null" >
+        f_bip_ischanged = #{fBipIschanged,jdbcType=CHAR},
+      </if>
+      <if test="fBipInteger != null" >
+        f_bip_integer = #{fBipInteger,jdbcType=INTEGER},
+      </if>
+      <if test="fBipSoursedown != null" >
+        f_bip_soursedown = #{fBipSoursedown,jdbcType=INTEGER},
+      </if>
+      <if test="fBipAccept != null" >
+        f_bip_accept = #{fBipAccept,jdbcType=INTEGER},
+      </if>
+      <if test="fbillstatus != null" >
+        fbillstatus = #{fbillstatus,jdbcType=CHAR},
+      </if>
+      <if test="fBipOrgid != null" >
+        f_bip_orgid = #{fBipOrgid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipAssistant != null" >
+        f_bip_assistant = #{fBipAssistant,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipInteger1 != null" >
+        f_bip_integer1 = #{fBipInteger1,jdbcType=INTEGER},
+      </if>
+      <if test="fBipArrivecheker != null" >
+        f_bip_arrivecheker = #{fBipArrivecheker,jdbcType=INTEGER},
+      </if>
+      <if test="fBipArrivechecktime != null" >
+        f_bip_arrivechecktime = #{fBipArrivechecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipDealoverperson != null" >
+        f_bip_dealoverperson = #{fBipDealoverperson,jdbcType=INTEGER},
+      </if>
+      <if test="fBipOverchecktime != null" >
+        f_bip_overchecktime = #{fBipOverchecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipFieldchecktime != null" >
+        f_bip_fieldchecktime = #{fBipFieldchecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipResultdiscription != null" >
+        f_bip_resultdiscription = #{fBipResultdiscription,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipFiledresultdiscription != null" >
+        f_bip_filedresultdiscription = #{fBipFiledresultdiscription,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipIsregister != null" >
+        f_bip_isregister = #{fBipIsregister,jdbcType=CHAR},
+      </if>
+      <if test="fBipUpfieldnum != null" >
+        f_bip_upfieldnum = #{fBipUpfieldnum,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipIsoverregister != null" >
+        f_bip_isoverregister = #{fBipIsoverregister,jdbcType=CHAR},
+      </if>
+      <if test="fBipPoliticaloutlook != null" >
+        f_bip_politicaloutlook = #{fBipPoliticaloutlook,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipIsfirstsendmessage != null" >
+        f_bip_isfirstsendmessage = #{fBipIsfirstsendmessage,jdbcType=CHAR},
+      </if>
+      <if test="fBipIschangesendmessage != null" >
+        f_bip_ischangesendmessage = #{fBipIschangesendmessage,jdbcType=CHAR},
+      </if>
+      <if test="fBipSynchrointeger != null" >
+        f_bip_synchrointeger = #{fBipSynchrointeger,jdbcType=INTEGER},
+      </if>
+	  <if test="FBIPRemarks != null" >
+       remarks = #{FBIPRemarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where
+    	fid=#{fid}
+    
+  </update>
+  
+  <!-- 逆向生成 
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fid, fbillno, fdocumentstatus, f_bip_petitionernum, f_bip_governanceunit, f_bip_thirdclassify, 
+    f_bip_firstclassify, f_bip_eventdetails, f_bip_petitionerid, f_bip_petitionertel, 
+    f_bip_petitiontype, f_bip_secondclassify, f_bip_petitioner, f_bip_location, f_bip_handledresult, 
+    f_bip_eventhandledresult, f_bip_creatername, f_bip_checkdate, f_bip_createdate, f_bip_modifydate, 
+    f_bip_modifiername, f_bip_checkername, f_bip_sourceid, f_bip_awareofperson, f_bip_fieldhandler, 
+    f_bip_fieldconfirmer, f_bip_eventhandler, f_bip_eventconfirmer, f_bip_awareoftime, 
+    f_bip_arrivaltime, f_bip_fieldhandledtime, f_bip_eventhandledtime, f_bip_ischanged, 
+    f_bip_integer, f_bip_soursedown, f_bip_accept, fbillstatus, f_bip_orgid, f_bip_assistant, 
+    f_bip_integer1, f_bip_arrivecheker, f_bip_arrivechecktime, f_bip_dealoverperson, 
+    f_bip_overchecktime, f_bip_fieldchecktime, f_bip_resultdiscription, f_bip_filedresultdiscription, 
+    f_bip_isregister, f_bip_upfieldnum, f_bip_isoverregister, f_bip_politicaloutlook, 
+    f_bip_isfirstsendmessage, f_bip_ischangesendmessage, f_bip_synchrointeger
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kingcai.entity.BipTComplaintmanageheadExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bip_t_complaintmanagehead
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.kingcai.entity.BipTComplaintmanageheadExample" >
+    delete from bip_t_complaintmanagehead
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.kingcai.entity.BipTComplaintmanagehead" >
+    insert into bip_t_complaintmanagehead (fid, fbillno, fdocumentstatus, 
+      f_bip_petitionernum, f_bip_governanceunit, 
+      f_bip_thirdclassify, f_bip_firstclassify, f_bip_eventdetails, 
+      f_bip_petitionerid, f_bip_petitionertel, f_bip_petitiontype, 
+      f_bip_secondclassify, f_bip_petitioner, f_bip_location, 
+      f_bip_handledresult, f_bip_eventhandledresult, 
+      f_bip_creatername, f_bip_checkdate, f_bip_createdate, 
+      f_bip_modifydate, f_bip_modifiername, f_bip_checkername, 
+      f_bip_sourceid, f_bip_awareofperson, f_bip_fieldhandler, 
+      f_bip_fieldconfirmer, f_bip_eventhandler, f_bip_eventconfirmer, 
+      f_bip_awareoftime, f_bip_arrivaltime, f_bip_fieldhandledtime, 
+      f_bip_eventhandledtime, f_bip_ischanged, f_bip_integer, 
+      f_bip_soursedown, f_bip_accept, fbillstatus, 
+      f_bip_orgid, f_bip_assistant, f_bip_integer1, 
+      f_bip_arrivecheker, f_bip_arrivechecktime, 
+      f_bip_dealoverperson, f_bip_overchecktime, 
+      f_bip_fieldchecktime, f_bip_resultdiscription, 
+      f_bip_filedresultdiscription, f_bip_isregister, 
+      f_bip_upfieldnum, f_bip_isoverregister, f_bip_politicaloutlook, 
+      f_bip_isfirstsendmessage, f_bip_ischangesendmessage, 
+      f_bip_synchrointeger)
+    values (#{fid,jdbcType=BIGINT}, #{fbillno,jdbcType=VARCHAR}, #{fdocumentstatus,jdbcType=CHAR}, 
+      #{fBipPetitionernum,jdbcType=INTEGER}, #{fBipGovernanceunit,jdbcType=INTEGER}, 
+      #{fBipThirdclassify,jdbcType=VARCHAR}, #{fBipFirstclassify,jdbcType=VARCHAR}, #{fBipEventdetails,jdbcType=VARCHAR}, 
+      #{fBipPetitionerid,jdbcType=VARCHAR}, #{fBipPetitionertel,jdbcType=VARCHAR}, #{fBipPetitiontype,jdbcType=INTEGER}, 
+      #{fBipSecondclassify,jdbcType=VARCHAR}, #{fBipPetitioner,jdbcType=VARCHAR}, #{fBipLocation,jdbcType=VARCHAR}, 
+      #{fBipHandledresult,jdbcType=VARCHAR}, #{fBipEventhandledresult,jdbcType=VARCHAR}, 
+      #{fBipCreatername,jdbcType=INTEGER}, #{fBipCheckdate,jdbcType=TIMESTAMP}, #{fBipCreatedate,jdbcType=TIMESTAMP}, 
+      #{fBipModifydate,jdbcType=TIMESTAMP}, #{fBipModifiername,jdbcType=INTEGER}, #{fBipCheckername,jdbcType=INTEGER}, 
+      #{fBipSourceid,jdbcType=VARCHAR}, #{fBipAwareofperson,jdbcType=INTEGER}, #{fBipFieldhandler,jdbcType=INTEGER}, 
+      #{fBipFieldconfirmer,jdbcType=INTEGER}, #{fBipEventhandler,jdbcType=INTEGER}, #{fBipEventconfirmer,jdbcType=INTEGER}, 
+      #{fBipAwareoftime,jdbcType=TIMESTAMP}, #{fBipArrivaltime,jdbcType=TIMESTAMP}, #{fBipFieldhandledtime,jdbcType=TIMESTAMP}, 
+      #{fBipEventhandledtime,jdbcType=TIMESTAMP}, #{fBipIschanged,jdbcType=CHAR}, #{fBipInteger,jdbcType=INTEGER}, 
+      #{fBipSoursedown,jdbcType=INTEGER}, #{fBipAccept,jdbcType=INTEGER}, #{fbillstatus,jdbcType=CHAR}, 
+      #{fBipOrgid,jdbcType=INTEGER}, #{fBipAssistant,jdbcType=VARCHAR}, #{fBipInteger1,jdbcType=INTEGER}, 
+      #{fBipArrivecheker,jdbcType=INTEGER}, #{fBipArrivechecktime,jdbcType=TIMESTAMP}, 
+      #{fBipDealoverperson,jdbcType=INTEGER}, #{fBipOverchecktime,jdbcType=TIMESTAMP}, 
+      #{fBipFieldchecktime,jdbcType=TIMESTAMP}, #{fBipResultdiscription,jdbcType=VARCHAR}, 
+      #{fBipFiledresultdiscription,jdbcType=VARCHAR}, #{fBipIsregister,jdbcType=CHAR}, 
+      #{fBipUpfieldnum,jdbcType=VARCHAR}, #{fBipIsoverregister,jdbcType=CHAR}, #{fBipPoliticaloutlook,jdbcType=VARCHAR}, 
+      #{fBipIsfirstsendmessage,jdbcType=CHAR}, #{fBipIschangesendmessage,jdbcType=CHAR}, 
+      #{fBipSynchrointeger,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.kingcai.entity.BipTComplaintmanagehead" >
+    insert into bip_t_complaintmanagehead
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fbillno != null" >
+        fbillno,
+      </if>
+      <if test="fdocumentstatus != null" >
+        fdocumentstatus,
+      </if>
+      <if test="fBipPetitionernum != null" >
+        f_bip_petitionernum,
+      </if>
+      <if test="fBipGovernanceunit != null" >
+        f_bip_governanceunit,
+      </if>
+      <if test="fBipThirdclassify != null" >
+        f_bip_thirdclassify,
+      </if>
+      <if test="fBipFirstclassify != null" >
+        f_bip_firstclassify,
+      </if>
+      <if test="fBipEventdetails != null" >
+        f_bip_eventdetails,
+      </if>
+      <if test="fBipPetitionerid != null" >
+        f_bip_petitionerid,
+      </if>
+      <if test="fBipPetitionertel != null" >
+        f_bip_petitionertel,
+      </if>
+      <if test="fBipPetitiontype != null" >
+        f_bip_petitiontype,
+      </if>
+      <if test="fBipSecondclassify != null" >
+        f_bip_secondclassify,
+      </if>
+      <if test="fBipPetitioner != null" >
+        f_bip_petitioner,
+      </if>
+      <if test="fBipLocation != null" >
+        f_bip_location,
+      </if>
+      <if test="fBipHandledresult != null" >
+        f_bip_handledresult,
+      </if>
+      <if test="fBipEventhandledresult != null" >
+        f_bip_eventhandledresult,
+      </if>
+      <if test="fBipCreatername != null" >
+        f_bip_creatername,
+      </if>
+      <if test="fBipCheckdate != null" >
+        f_bip_checkdate,
+      </if>
+      <if test="fBipCreatedate != null" >
+        f_bip_createdate,
+      </if>
+      <if test="fBipModifydate != null" >
+        f_bip_modifydate,
+      </if>
+      <if test="fBipModifiername != null" >
+        f_bip_modifiername,
+      </if>
+      <if test="fBipCheckername != null" >
+        f_bip_checkername,
+      </if>
+      <if test="fBipSourceid != null" >
+        f_bip_sourceid,
+      </if>
+      <if test="fBipAwareofperson != null" >
+        f_bip_awareofperson,
+      </if>
+      <if test="fBipFieldhandler != null" >
+        f_bip_fieldhandler,
+      </if>
+      <if test="fBipFieldconfirmer != null" >
+        f_bip_fieldconfirmer,
+      </if>
+      <if test="fBipEventhandler != null" >
+        f_bip_eventhandler,
+      </if>
+      <if test="fBipEventconfirmer != null" >
+        f_bip_eventconfirmer,
+      </if>
+      <if test="fBipAwareoftime != null" >
+        f_bip_awareoftime,
+      </if>
+      <if test="fBipArrivaltime != null" >
+        f_bip_arrivaltime,
+      </if>
+      <if test="fBipFieldhandledtime != null" >
+        f_bip_fieldhandledtime,
+      </if>
+      <if test="fBipEventhandledtime != null" >
+        f_bip_eventhandledtime,
+      </if>
+      <if test="fBipIschanged != null" >
+        f_bip_ischanged,
+      </if>
+      <if test="fBipInteger != null" >
+        f_bip_integer,
+      </if>
+      <if test="fBipSoursedown != null" >
+        f_bip_soursedown,
+      </if>
+      <if test="fBipAccept != null" >
+        f_bip_accept,
+      </if>
+      <if test="fbillstatus != null" >
+        fbillstatus,
+      </if>
+      <if test="fBipOrgid != null" >
+        f_bip_orgid,
+      </if>
+      <if test="fBipAssistant != null" >
+        f_bip_assistant,
+      </if>
+      <if test="fBipInteger1 != null" >
+        f_bip_integer1,
+      </if>
+      <if test="fBipArrivecheker != null" >
+        f_bip_arrivecheker,
+      </if>
+      <if test="fBipArrivechecktime != null" >
+        f_bip_arrivechecktime,
+      </if>
+      <if test="fBipDealoverperson != null" >
+        f_bip_dealoverperson,
+      </if>
+      <if test="fBipOverchecktime != null" >
+        f_bip_overchecktime,
+      </if>
+      <if test="fBipFieldchecktime != null" >
+        f_bip_fieldchecktime,
+      </if>
+      <if test="fBipResultdiscription != null" >
+        f_bip_resultdiscription,
+      </if>
+      <if test="fBipFiledresultdiscription != null" >
+        f_bip_filedresultdiscription,
+      </if>
+      <if test="fBipIsregister != null" >
+        f_bip_isregister,
+      </if>
+      <if test="fBipUpfieldnum != null" >
+        f_bip_upfieldnum,
+      </if>
+      <if test="fBipIsoverregister != null" >
+        f_bip_isoverregister,
+      </if>
+      <if test="fBipPoliticaloutlook != null" >
+        f_bip_politicaloutlook,
+      </if>
+      <if test="fBipIsfirstsendmessage != null" >
+        f_bip_isfirstsendmessage,
+      </if>
+      <if test="fBipIschangesendmessage != null" >
+        f_bip_ischangesendmessage,
+      </if>
+      <if test="fBipSynchrointeger != null" >
+        f_bip_synchrointeger,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="fbillno != null" >
+        #{fbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="fdocumentstatus != null" >
+        #{fdocumentstatus,jdbcType=CHAR},
+      </if>
+      <if test="fBipPetitionernum != null" >
+        #{fBipPetitionernum,jdbcType=INTEGER},
+      </if>
+      <if test="fBipGovernanceunit != null" >
+        #{fBipGovernanceunit,jdbcType=INTEGER},
+      </if>
+      <if test="fBipThirdclassify != null" >
+        #{fBipThirdclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipFirstclassify != null" >
+        #{fBipFirstclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipEventdetails != null" >
+        #{fBipEventdetails,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPetitionerid != null" >
+        #{fBipPetitionerid,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPetitionertel != null" >
+        #{fBipPetitionertel,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPetitiontype != null" >
+        #{fBipPetitiontype,jdbcType=INTEGER},
+      </if>
+      <if test="fBipSecondclassify != null" >
+        #{fBipSecondclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPetitioner != null" >
+        #{fBipPetitioner,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipLocation != null" >
+        #{fBipLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipHandledresult != null" >
+        #{fBipHandledresult,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipEventhandledresult != null" >
+        #{fBipEventhandledresult,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipCreatername != null" >
+        #{fBipCreatername,jdbcType=INTEGER},
+      </if>
+      <if test="fBipCheckdate != null" >
+        #{fBipCheckdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipCreatedate != null" >
+        #{fBipCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipModifydate != null" >
+        #{fBipModifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipModifiername != null" >
+        #{fBipModifiername,jdbcType=INTEGER},
+      </if>
+      <if test="fBipCheckername != null" >
+        #{fBipCheckername,jdbcType=INTEGER},
+      </if>
+      <if test="fBipSourceid != null" >
+        #{fBipSourceid,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipAwareofperson != null" >
+        #{fBipAwareofperson,jdbcType=INTEGER},
+      </if>
+      <if test="fBipFieldhandler != null" >
+        #{fBipFieldhandler,jdbcType=INTEGER},
+      </if>
+      <if test="fBipFieldconfirmer != null" >
+        #{fBipFieldconfirmer,jdbcType=INTEGER},
+      </if>
+      <if test="fBipEventhandler != null" >
+        #{fBipEventhandler,jdbcType=INTEGER},
+      </if>
+      <if test="fBipEventconfirmer != null" >
+        #{fBipEventconfirmer,jdbcType=INTEGER},
+      </if>
+      <if test="fBipAwareoftime != null" >
+        #{fBipAwareoftime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipArrivaltime != null" >
+        #{fBipArrivaltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipFieldhandledtime != null" >
+        #{fBipFieldhandledtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipEventhandledtime != null" >
+        #{fBipEventhandledtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipIschanged != null" >
+        #{fBipIschanged,jdbcType=CHAR},
+      </if>
+      <if test="fBipInteger != null" >
+        #{fBipInteger,jdbcType=INTEGER},
+      </if>
+      <if test="fBipSoursedown != null" >
+        #{fBipSoursedown,jdbcType=INTEGER},
+      </if>
+      <if test="fBipAccept != null" >
+        #{fBipAccept,jdbcType=INTEGER},
+      </if>
+      <if test="fbillstatus != null" >
+        #{fbillstatus,jdbcType=CHAR},
+      </if>
+      <if test="fBipOrgid != null" >
+        #{fBipOrgid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipAssistant != null" >
+        #{fBipAssistant,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipInteger1 != null" >
+        #{fBipInteger1,jdbcType=INTEGER},
+      </if>
+      <if test="fBipArrivecheker != null" >
+        #{fBipArrivecheker,jdbcType=INTEGER},
+      </if>
+      <if test="fBipArrivechecktime != null" >
+        #{fBipArrivechecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipDealoverperson != null" >
+        #{fBipDealoverperson,jdbcType=INTEGER},
+      </if>
+      <if test="fBipOverchecktime != null" >
+        #{fBipOverchecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipFieldchecktime != null" >
+        #{fBipFieldchecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipResultdiscription != null" >
+        #{fBipResultdiscription,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipFiledresultdiscription != null" >
+        #{fBipFiledresultdiscription,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipIsregister != null" >
+        #{fBipIsregister,jdbcType=CHAR},
+      </if>
+      <if test="fBipUpfieldnum != null" >
+        #{fBipUpfieldnum,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipIsoverregister != null" >
+        #{fBipIsoverregister,jdbcType=CHAR},
+      </if>
+      <if test="fBipPoliticaloutlook != null" >
+        #{fBipPoliticaloutlook,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipIsfirstsendmessage != null" >
+        #{fBipIsfirstsendmessage,jdbcType=CHAR},
+      </if>
+      <if test="fBipIschangesendmessage != null" >
+        #{fBipIschangesendmessage,jdbcType=CHAR},
+      </if>
+      <if test="fBipSynchrointeger != null" >
+        #{fBipSynchrointeger,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.kingcai.entity.BipTComplaintmanageheadExample" resultType="java.lang.Integer" >
+    select count(*) from bip_t_complaintmanagehead
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bip_t_complaintmanagehead
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fbillno != null" >
+        fbillno = #{record.fbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fdocumentstatus != null" >
+        fdocumentstatus = #{record.fdocumentstatus,jdbcType=CHAR},
+      </if>
+      <if test="record.fBipPetitionernum != null" >
+        f_bip_petitionernum = #{record.fBipPetitionernum,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipGovernanceunit != null" >
+        f_bip_governanceunit = #{record.fBipGovernanceunit,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipThirdclassify != null" >
+        f_bip_thirdclassify = #{record.fBipThirdclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipFirstclassify != null" >
+        f_bip_firstclassify = #{record.fBipFirstclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipEventdetails != null" >
+        f_bip_eventdetails = #{record.fBipEventdetails,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipPetitionerid != null" >
+        f_bip_petitionerid = #{record.fBipPetitionerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipPetitionertel != null" >
+        f_bip_petitionertel = #{record.fBipPetitionertel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipPetitiontype != null" >
+        f_bip_petitiontype = #{record.fBipPetitiontype,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipSecondclassify != null" >
+        f_bip_secondclassify = #{record.fBipSecondclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipPetitioner != null" >
+        f_bip_petitioner = #{record.fBipPetitioner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipLocation != null" >
+        f_bip_location = #{record.fBipLocation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipHandledresult != null" >
+        f_bip_handledresult = #{record.fBipHandledresult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipEventhandledresult != null" >
+        f_bip_eventhandledresult = #{record.fBipEventhandledresult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipCreatername != null" >
+        f_bip_creatername = #{record.fBipCreatername,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipCheckdate != null" >
+        f_bip_checkdate = #{record.fBipCheckdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipCreatedate != null" >
+        f_bip_createdate = #{record.fBipCreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipModifydate != null" >
+        f_bip_modifydate = #{record.fBipModifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipModifiername != null" >
+        f_bip_modifiername = #{record.fBipModifiername,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipCheckername != null" >
+        f_bip_checkername = #{record.fBipCheckername,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipSourceid != null" >
+        f_bip_sourceid = #{record.fBipSourceid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipAwareofperson != null" >
+        f_bip_awareofperson = #{record.fBipAwareofperson,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipFieldhandler != null" >
+        f_bip_fieldhandler = #{record.fBipFieldhandler,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipFieldconfirmer != null" >
+        f_bip_fieldconfirmer = #{record.fBipFieldconfirmer,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipEventhandler != null" >
+        f_bip_eventhandler = #{record.fBipEventhandler,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipEventconfirmer != null" >
+        f_bip_eventconfirmer = #{record.fBipEventconfirmer,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipAwareoftime != null" >
+        f_bip_awareoftime = #{record.fBipAwareoftime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipArrivaltime != null" >
+        f_bip_arrivaltime = #{record.fBipArrivaltime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipFieldhandledtime != null" >
+        f_bip_fieldhandledtime = #{record.fBipFieldhandledtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipEventhandledtime != null" >
+        f_bip_eventhandledtime = #{record.fBipEventhandledtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipIschanged != null" >
+        f_bip_ischanged = #{record.fBipIschanged,jdbcType=CHAR},
+      </if>
+      <if test="record.fBipInteger != null" >
+        f_bip_integer = #{record.fBipInteger,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipSoursedown != null" >
+        f_bip_soursedown = #{record.fBipSoursedown,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipAccept != null" >
+        f_bip_accept = #{record.fBipAccept,jdbcType=INTEGER},
+      </if>
+      <if test="record.fbillstatus != null" >
+        fbillstatus = #{record.fbillstatus,jdbcType=CHAR},
+      </if>
+      <if test="record.fBipOrgid != null" >
+        f_bip_orgid = #{record.fBipOrgid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipAssistant != null" >
+        f_bip_assistant = #{record.fBipAssistant,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipInteger1 != null" >
+        f_bip_integer1 = #{record.fBipInteger1,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipArrivecheker != null" >
+        f_bip_arrivecheker = #{record.fBipArrivecheker,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipArrivechecktime != null" >
+        f_bip_arrivechecktime = #{record.fBipArrivechecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipDealoverperson != null" >
+        f_bip_dealoverperson = #{record.fBipDealoverperson,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipOverchecktime != null" >
+        f_bip_overchecktime = #{record.fBipOverchecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipFieldchecktime != null" >
+        f_bip_fieldchecktime = #{record.fBipFieldchecktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipResultdiscription != null" >
+        f_bip_resultdiscription = #{record.fBipResultdiscription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipFiledresultdiscription != null" >
+        f_bip_filedresultdiscription = #{record.fBipFiledresultdiscription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipIsregister != null" >
+        f_bip_isregister = #{record.fBipIsregister,jdbcType=CHAR},
+      </if>
+      <if test="record.fBipUpfieldnum != null" >
+        f_bip_upfieldnum = #{record.fBipUpfieldnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipIsoverregister != null" >
+        f_bip_isoverregister = #{record.fBipIsoverregister,jdbcType=CHAR},
+      </if>
+      <if test="record.fBipPoliticaloutlook != null" >
+        f_bip_politicaloutlook = #{record.fBipPoliticaloutlook,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipIsfirstsendmessage != null" >
+        f_bip_isfirstsendmessage = #{record.fBipIsfirstsendmessage,jdbcType=CHAR},
+      </if>
+      <if test="record.fBipIschangesendmessage != null" >
+        f_bip_ischangesendmessage = #{record.fBipIschangesendmessage,jdbcType=CHAR},
+      </if>
+      <if test="record.fBipSynchrointeger != null" >
+        f_bip_synchrointeger = #{record.fBipSynchrointeger,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bip_t_complaintmanagehead
+    set fid = #{record.fid,jdbcType=BIGINT},
+      fbillno = #{record.fbillno,jdbcType=VARCHAR},
+      fdocumentstatus = #{record.fdocumentstatus,jdbcType=CHAR},
+      f_bip_petitionernum = #{record.fBipPetitionernum,jdbcType=INTEGER},
+      f_bip_governanceunit = #{record.fBipGovernanceunit,jdbcType=INTEGER},
+      f_bip_thirdclassify = #{record.fBipThirdclassify,jdbcType=VARCHAR},
+      f_bip_firstclassify = #{record.fBipFirstclassify,jdbcType=VARCHAR},
+      f_bip_eventdetails = #{record.fBipEventdetails,jdbcType=VARCHAR},
+      f_bip_petitionerid = #{record.fBipPetitionerid,jdbcType=VARCHAR},
+      f_bip_petitionertel = #{record.fBipPetitionertel,jdbcType=VARCHAR},
+      f_bip_petitiontype = #{record.fBipPetitiontype,jdbcType=INTEGER},
+      f_bip_secondclassify = #{record.fBipSecondclassify,jdbcType=VARCHAR},
+      f_bip_petitioner = #{record.fBipPetitioner,jdbcType=VARCHAR},
+      f_bip_location = #{record.fBipLocation,jdbcType=VARCHAR},
+      f_bip_handledresult = #{record.fBipHandledresult,jdbcType=VARCHAR},
+      f_bip_eventhandledresult = #{record.fBipEventhandledresult,jdbcType=VARCHAR},
+      f_bip_creatername = #{record.fBipCreatername,jdbcType=INTEGER},
+      f_bip_checkdate = #{record.fBipCheckdate,jdbcType=TIMESTAMP},
+      f_bip_createdate = #{record.fBipCreatedate,jdbcType=TIMESTAMP},
+      f_bip_modifydate = #{record.fBipModifydate,jdbcType=TIMESTAMP},
+      f_bip_modifiername = #{record.fBipModifiername,jdbcType=INTEGER},
+      f_bip_checkername = #{record.fBipCheckername,jdbcType=INTEGER},
+      f_bip_sourceid = #{record.fBipSourceid,jdbcType=VARCHAR},
+      f_bip_awareofperson = #{record.fBipAwareofperson,jdbcType=INTEGER},
+      f_bip_fieldhandler = #{record.fBipFieldhandler,jdbcType=INTEGER},
+      f_bip_fieldconfirmer = #{record.fBipFieldconfirmer,jdbcType=INTEGER},
+      f_bip_eventhandler = #{record.fBipEventhandler,jdbcType=INTEGER},
+      f_bip_eventconfirmer = #{record.fBipEventconfirmer,jdbcType=INTEGER},
+      f_bip_awareoftime = #{record.fBipAwareoftime,jdbcType=TIMESTAMP},
+      f_bip_arrivaltime = #{record.fBipArrivaltime,jdbcType=TIMESTAMP},
+      f_bip_fieldhandledtime = #{record.fBipFieldhandledtime,jdbcType=TIMESTAMP},
+      f_bip_eventhandledtime = #{record.fBipEventhandledtime,jdbcType=TIMESTAMP},
+      f_bip_ischanged = #{record.fBipIschanged,jdbcType=CHAR},
+      f_bip_integer = #{record.fBipInteger,jdbcType=INTEGER},
+      f_bip_soursedown = #{record.fBipSoursedown,jdbcType=INTEGER},
+      f_bip_accept = #{record.fBipAccept,jdbcType=INTEGER},
+      fbillstatus = #{record.fbillstatus,jdbcType=CHAR},
+      f_bip_orgid = #{record.fBipOrgid,jdbcType=INTEGER},
+      f_bip_assistant = #{record.fBipAssistant,jdbcType=VARCHAR},
+      f_bip_integer1 = #{record.fBipInteger1,jdbcType=INTEGER},
+      f_bip_arrivecheker = #{record.fBipArrivecheker,jdbcType=INTEGER},
+      f_bip_arrivechecktime = #{record.fBipArrivechecktime,jdbcType=TIMESTAMP},
+      f_bip_dealoverperson = #{record.fBipDealoverperson,jdbcType=INTEGER},
+      f_bip_overchecktime = #{record.fBipOverchecktime,jdbcType=TIMESTAMP},
+      f_bip_fieldchecktime = #{record.fBipFieldchecktime,jdbcType=TIMESTAMP},
+      f_bip_resultdiscription = #{record.fBipResultdiscription,jdbcType=VARCHAR},
+      f_bip_filedresultdiscription = #{record.fBipFiledresultdiscription,jdbcType=VARCHAR},
+      f_bip_isregister = #{record.fBipIsregister,jdbcType=CHAR},
+      f_bip_upfieldnum = #{record.fBipUpfieldnum,jdbcType=VARCHAR},
+      f_bip_isoverregister = #{record.fBipIsoverregister,jdbcType=CHAR},
+      f_bip_politicaloutlook = #{record.fBipPoliticaloutlook,jdbcType=VARCHAR},
+      f_bip_isfirstsendmessage = #{record.fBipIsfirstsendmessage,jdbcType=CHAR},
+      f_bip_ischangesendmessage = #{record.fBipIschangesendmessage,jdbcType=CHAR},
+      f_bip_synchrointeger = #{record.fBipSynchrointeger,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>-->
+</mapper>

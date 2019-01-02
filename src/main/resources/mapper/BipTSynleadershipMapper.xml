@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kingcai.dao.BipTSynleadershipMapper" >
+  <resultMap id="BaseResultMap" type="cn.kingcai.entity.BipTSynleadership" >
+    <result column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="fentryid" property="fentryid" jdbcType="BIGINT" />
+    <result column="fseq" property="fseq" jdbcType="INTEGER" />
+    <result column="f_bip_datetime" property="fBipDatetime" jdbcType="TIMESTAMP" />
+    <result column="f_bip_leadershipadvice" property="fBipLeadershipadvice" jdbcType="VARCHAR" />
+    <result column="f_bip_leader" property="fBipLeader" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fid, fentryid, fseq, f_bip_datetime, f_bip_leadershipadvice, f_bip_leader
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kingcai.entity.BipTSynleadershipExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bip_t_synleadership
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.kingcai.entity.BipTSynleadershipExample" >
+    delete from bip_t_synleadership
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.kingcai.entity.BipTSynleadership" >
+    insert into bip_t_synleadership (fid, fentryid, fseq, 
+      f_bip_datetime, f_bip_leadershipadvice, f_bip_leader
+      )
+    values (#{fid,jdbcType=BIGINT}, #{fentryid,jdbcType=BIGINT}, #{fseq,jdbcType=INTEGER}, 
+      #{fBipDatetime,jdbcType=TIMESTAMP}, #{fBipLeadershipadvice,jdbcType=VARCHAR}, #{fBipLeader,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.kingcai.entity.BipTSynleadership" >
+    insert into bip_t_synleadership
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fentryid != null" >
+        fentryid,
+      </if>
+      <if test="fseq != null" >
+        fseq,
+      </if>
+      <if test="fBipDatetime != null" >
+        f_bip_datetime,
+      </if>
+      <if test="fBipLeadershipadvice != null" >
+        f_bip_leadershipadvice,
+      </if>
+      <if test="fBipLeader != null" >
+        f_bip_leader,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="fentryid != null" >
+        #{fentryid,jdbcType=BIGINT},
+      </if>
+      <if test="fseq != null" >
+        #{fseq,jdbcType=INTEGER},
+      </if>
+      <if test="fBipDatetime != null" >
+        #{fBipDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipLeadershipadvice != null" >
+        #{fBipLeadershipadvice,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipLeader != null" >
+        #{fBipLeader,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.kingcai.entity.BipTSynleadershipExample" resultType="java.lang.Integer" >
+    select count(*) from bip_t_synleadership
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bip_t_synleadership
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fentryid != null" >
+        fentryid = #{record.fentryid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fseq != null" >
+        fseq = #{record.fseq,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipDatetime != null" >
+        f_bip_datetime = #{record.fBipDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipLeadershipadvice != null" >
+        f_bip_leadershipadvice = #{record.fBipLeadershipadvice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipLeader != null" >
+        f_bip_leader = #{record.fBipLeader,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bip_t_synleadership
+    set fid = #{record.fid,jdbcType=BIGINT},
+      fentryid = #{record.fentryid,jdbcType=BIGINT},
+      fseq = #{record.fseq,jdbcType=INTEGER},
+      f_bip_datetime = #{record.fBipDatetime,jdbcType=TIMESTAMP},
+      f_bip_leadershipadvice = #{record.fBipLeadershipadvice,jdbcType=VARCHAR},
+      f_bip_leader = #{record.fBipLeader,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kingcai.dao.BipTMessagelogMapper" >
+  <resultMap id="BaseResultMap" type="cn.kingcai.entity.BipTMessagelog" >
+    <result column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="fformid" property="fformid" jdbcType="VARCHAR" />
+    <result column="f_bip_messagetype" property="fBipMessagetype" jdbcType="VARCHAR" />
+    <result column="f_bip_affairsunit" property="fBipAffairsunit" jdbcType="VARCHAR" />
+    <result column="f_bip_messagegeter" property="fBipMessagegeter" jdbcType="VARCHAR" />
+    <result column="f_bip_issuccess" property="fBipIssuccess" jdbcType="CHAR" />
+    <result column="f_bip_messageposttime" property="fBipMessageposttime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fid, fformid, f_bip_messagetype, f_bip_affairsunit, f_bip_messagegeter, f_bip_issuccess, 
+    f_bip_messageposttime
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kingcai.entity.BipTMessagelogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bip_t_messagelog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.kingcai.entity.BipTMessagelogExample" >
+    delete from bip_t_messagelog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.kingcai.entity.BipTMessagelog" >
+    insert into bip_t_messagelog (fid, fformid, f_bip_messagetype, 
+      f_bip_affairsunit, f_bip_messagegeter, f_bip_issuccess, 
+      f_bip_messageposttime)
+    values (#{fid,jdbcType=BIGINT}, #{fformid,jdbcType=VARCHAR}, #{fBipMessagetype,jdbcType=VARCHAR}, 
+      #{fBipAffairsunit,jdbcType=VARCHAR}, #{fBipMessagegeter,jdbcType=VARCHAR}, #{fBipIssuccess,jdbcType=CHAR}, 
+      #{fBipMessageposttime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.kingcai.entity.BipTMessagelog" >
+    insert into bip_t_messagelog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fformid != null" >
+        fformid,
+      </if>
+      <if test="fBipMessagetype != null" >
+        f_bip_messagetype,
+      </if>
+      <if test="fBipAffairsunit != null" >
+        f_bip_affairsunit,
+      </if>
+      <if test="fBipMessagegeter != null" >
+        f_bip_messagegeter,
+      </if>
+      <if test="fBipIssuccess != null" >
+        f_bip_issuccess,
+      </if>
+      <if test="fBipMessageposttime != null" >
+        f_bip_messageposttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="fformid != null" >
+        #{fformid,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipMessagetype != null" >
+        #{fBipMessagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipAffairsunit != null" >
+        #{fBipAffairsunit,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipMessagegeter != null" >
+        #{fBipMessagegeter,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipIssuccess != null" >
+        #{fBipIssuccess,jdbcType=CHAR},
+      </if>
+      <if test="fBipMessageposttime != null" >
+        #{fBipMessageposttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.kingcai.entity.BipTMessagelogExample" resultType="java.lang.Integer" >
+    select count(*) from bip_t_messagelog
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bip_t_messagelog
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fformid != null" >
+        fformid = #{record.fformid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipMessagetype != null" >
+        f_bip_messagetype = #{record.fBipMessagetype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipAffairsunit != null" >
+        f_bip_affairsunit = #{record.fBipAffairsunit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipMessagegeter != null" >
+        f_bip_messagegeter = #{record.fBipMessagegeter,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipIssuccess != null" >
+        f_bip_issuccess = #{record.fBipIssuccess,jdbcType=CHAR},
+      </if>
+      <if test="record.fBipMessageposttime != null" >
+        f_bip_messageposttime = #{record.fBipMessageposttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bip_t_messagelog
+    set fid = #{record.fid,jdbcType=BIGINT},
+      fformid = #{record.fformid,jdbcType=VARCHAR},
+      f_bip_messagetype = #{record.fBipMessagetype,jdbcType=VARCHAR},
+      f_bip_affairsunit = #{record.fBipAffairsunit,jdbcType=VARCHAR},
+      f_bip_messagegeter = #{record.fBipMessagegeter,jdbcType=VARCHAR},
+      f_bip_issuccess = #{record.fBipIssuccess,jdbcType=CHAR},
+      f_bip_messageposttime = #{record.fBipMessageposttime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

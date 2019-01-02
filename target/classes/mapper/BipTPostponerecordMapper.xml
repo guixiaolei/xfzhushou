@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kingcai.dao.BipTPostponerecordMapper" >
+  <resultMap id="BaseResultMap" type="cn.kingcai.entity.BipTPostponerecord" >
+    <result column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="fentryid" property="fentryid" jdbcType="BIGINT" />
+    <result column="fseq" property="fseq" jdbcType="INTEGER" />
+    <result column="f_bip_applydate" property="fBipApplydate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_overdate" property="fBipOverdate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_applyreason" property="fBipApplyreason" jdbcType="VARCHAR" />
+    <result column="f_bip_recordperson" property="fBipRecordperson" jdbcType="VARCHAR" />
+    <result column="f_bip_cratedate" property="fBipCratedate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_processstate" property="fBipProcessstate" jdbcType="VARCHAR" />
+    <result column="f_bip_date" property="fBipDate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_isfirstdate" property="fBipIsfirstdate" jdbcType="CHAR" />
+    <result column="foperator" property="foperator" jdbcType="VARCHAR" />
+    <result column="f_bip_delayreason" property="fBipDelayreason" jdbcType="VARCHAR" />
+    <result column="f_bip_issystemupdate" property="fBipIssystemupdate" jdbcType="CHAR" />
+    <result column="f_bip_isdelay" property="fBipIsdelay" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fid, fentryid, fseq, f_bip_applydate, f_bip_overdate, f_bip_applyreason, f_bip_recordperson, 
+    f_bip_cratedate, f_bip_processstate, f_bip_date, f_bip_isfirstdate, foperator, f_bip_delayreason, 
+    f_bip_issystemupdate, f_bip_isdelay
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kingcai.entity.BipTPostponerecordExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bip_t_postponerecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.kingcai.entity.BipTPostponerecordExample" >
+    delete from bip_t_postponerecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.kingcai.entity.BipTPostponerecord" >
+    insert into bip_t_postponerecord (fid, fentryid, fseq, 
+      f_bip_applydate, f_bip_overdate, f_bip_applyreason, 
+      f_bip_recordperson, f_bip_cratedate, f_bip_processstate, 
+      f_bip_date, f_bip_isfirstdate, foperator, 
+      f_bip_delayreason, f_bip_issystemupdate, f_bip_isdelay
+      )
+    values (#{fid,jdbcType=BIGINT}, #{fentryid,jdbcType=BIGINT}, #{fseq,jdbcType=INTEGER}, 
+      #{fBipApplydate,jdbcType=TIMESTAMP}, #{fBipOverdate,jdbcType=TIMESTAMP}, #{fBipApplyreason,jdbcType=VARCHAR}, 
+      #{fBipRecordperson,jdbcType=VARCHAR}, #{fBipCratedate,jdbcType=TIMESTAMP}, #{fBipProcessstate,jdbcType=VARCHAR}, 
+      #{fBipDate,jdbcType=TIMESTAMP}, #{fBipIsfirstdate,jdbcType=CHAR}, #{foperator,jdbcType=VARCHAR}, 
+      #{fBipDelayreason,jdbcType=VARCHAR}, #{fBipIssystemupdate,jdbcType=CHAR}, #{fBipIsdelay,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="cn.kingcai.entity.BipTPostponerecord" >
+    insert into bip_t_postponerecord
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fentryid != null" >
+        fentryid,
+      </if>
+      <if test="fseq != null" >
+        fseq,
+      </if>
+      <if test="fBipApplydate != null" >
+        f_bip_applydate,
+      </if>
+      <if test="fBipOverdate != null" >
+        f_bip_overdate,
+      </if>
+      <if test="fBipApplyreason != null" >
+        f_bip_applyreason,
+      </if>
+      <if test="fBipRecordperson != null" >
+        f_bip_recordperson,
+      </if>
+      <if test="fBipCratedate != null" >
+        f_bip_cratedate,
+      </if>
+      <if test="fBipProcessstate != null" >
+        f_bip_processstate,
+      </if>
+      <if test="fBipDate != null" >
+        f_bip_date,
+      </if>
+      <if test="fBipIsfirstdate != null" >
+        f_bip_isfirstdate,
+      </if>
+      <if test="foperator != null" >
+        foperator,
+      </if>
+      <if test="fBipDelayreason != null" >
+        f_bip_delayreason,
+      </if>
+      <if test="fBipIssystemupdate != null" >
+        f_bip_issystemupdate,
+      </if>
+      <if test="fBipIsdelay != null" >
+        f_bip_isdelay,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="fentryid != null" >
+        #{fentryid,jdbcType=BIGINT},
+      </if>
+      <if test="fseq != null" >
+        #{fseq,jdbcType=INTEGER},
+      </if>
+      <if test="fBipApplydate != null" >
+        #{fBipApplydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipOverdate != null" >
+        #{fBipOverdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipApplyreason != null" >
+        #{fBipApplyreason,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipRecordperson != null" >
+        #{fBipRecordperson,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipCratedate != null" >
+        #{fBipCratedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipProcessstate != null" >
+        #{fBipProcessstate,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipDate != null" >
+        #{fBipDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipIsfirstdate != null" >
+        #{fBipIsfirstdate,jdbcType=CHAR},
+      </if>
+      <if test="foperator != null" >
+        #{foperator,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipDelayreason != null" >
+        #{fBipDelayreason,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipIssystemupdate != null" >
+        #{fBipIssystemupdate,jdbcType=CHAR},
+      </if>
+      <if test="fBipIsdelay != null" >
+        #{fBipIsdelay,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.kingcai.entity.BipTPostponerecordExample" resultType="java.lang.Integer" >
+    select count(*) from bip_t_postponerecord
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bip_t_postponerecord
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fentryid != null" >
+        fentryid = #{record.fentryid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fseq != null" >
+        fseq = #{record.fseq,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipApplydate != null" >
+        f_bip_applydate = #{record.fBipApplydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipOverdate != null" >
+        f_bip_overdate = #{record.fBipOverdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipApplyreason != null" >
+        f_bip_applyreason = #{record.fBipApplyreason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipRecordperson != null" >
+        f_bip_recordperson = #{record.fBipRecordperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipCratedate != null" >
+        f_bip_cratedate = #{record.fBipCratedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipProcessstate != null" >
+        f_bip_processstate = #{record.fBipProcessstate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipDate != null" >
+        f_bip_date = #{record.fBipDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipIsfirstdate != null" >
+        f_bip_isfirstdate = #{record.fBipIsfirstdate,jdbcType=CHAR},
+      </if>
+      <if test="record.foperator != null" >
+        foperator = #{record.foperator,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipDelayreason != null" >
+        f_bip_delayreason = #{record.fBipDelayreason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipIssystemupdate != null" >
+        f_bip_issystemupdate = #{record.fBipIssystemupdate,jdbcType=CHAR},
+      </if>
+      <if test="record.fBipIsdelay != null" >
+        f_bip_isdelay = #{record.fBipIsdelay,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bip_t_postponerecord
+    set fid = #{record.fid,jdbcType=BIGINT},
+      fentryid = #{record.fentryid,jdbcType=BIGINT},
+      fseq = #{record.fseq,jdbcType=INTEGER},
+      f_bip_applydate = #{record.fBipApplydate,jdbcType=TIMESTAMP},
+      f_bip_overdate = #{record.fBipOverdate,jdbcType=TIMESTAMP},
+      f_bip_applyreason = #{record.fBipApplyreason,jdbcType=VARCHAR},
+      f_bip_recordperson = #{record.fBipRecordperson,jdbcType=VARCHAR},
+      f_bip_cratedate = #{record.fBipCratedate,jdbcType=TIMESTAMP},
+      f_bip_processstate = #{record.fBipProcessstate,jdbcType=VARCHAR},
+      f_bip_date = #{record.fBipDate,jdbcType=TIMESTAMP},
+      f_bip_isfirstdate = #{record.fBipIsfirstdate,jdbcType=CHAR},
+      foperator = #{record.foperator,jdbcType=VARCHAR},
+      f_bip_delayreason = #{record.fBipDelayreason,jdbcType=VARCHAR},
+      f_bip_issystemupdate = #{record.fBipIssystemupdate,jdbcType=CHAR},
+      f_bip_isdelay = #{record.fBipIsdelay,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

@@ -1,0 +1,725 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kingcai.dao.TSecUserMapper" >
+  <resultMap id="BaseResultMap" type="cn.kingcai.entity.TSecUser" >
+    <result column="fuserid" property="fuserid" jdbcType="INTEGER" />
+    <result column="fname" property="fname" jdbcType="VARCHAR" />
+    <result column="fprimarygroup" property="fprimarygroup" jdbcType="INTEGER" />
+    <result column="fdescription" property="fdescription" jdbcType="VARCHAR" />
+    <result column="fempid" property="fempid" jdbcType="INTEGER" />
+    <result column="ftype" property="ftype" jdbcType="VARCHAR" />
+    <result column="fpassword" property="fpassword" jdbcType="VARCHAR" />
+    <result column="fislock" property="fislock" jdbcType="CHAR" />
+    <result column="funlocktime" property="funlocktime" jdbcType="TIMESTAMP" />
+    <result column="fpwdvaliddate" property="fpwdvaliddate" jdbcType="TIMESTAMP" />
+    <result column="fpwdmodifyvaliddate" property="fpwdmodifyvaliddate" jdbcType="TIMESTAMP" />
+    <result column="fissystemgen" property="fissystemgen" jdbcType="CHAR" />
+    <result column="flogincount" property="flogincount" jdbcType="INTEGER" />
+    <result column="ferrorcount" property="ferrorcount" jdbcType="INTEGER" />
+    <result column="fsid" property="fsid" jdbcType="VARCHAR" />
+    <result column="fforbidstatus" property="fforbidstatus" jdbcType="CHAR" />
+    <result column="fcreateorg" property="fcreateorg" jdbcType="INTEGER" />
+    <result column="fcreatedate" property="fcreatedate" jdbcType="TIMESTAMP" />
+    <result column="fcreatorid" property="fcreatorid" jdbcType="INTEGER" />
+    <result column="flinkobject" property="flinkobject" jdbcType="INTEGER" />
+    <result column="fmemo" property="fmemo" jdbcType="VARCHAR" />
+    <result column="fmbaccont" property="fmbaccont" jdbcType="VARCHAR" />
+    <result column="faccesstoken" property="faccesstoken" jdbcType="VARCHAR" />
+    <result column="ftokensecret" property="ftokensecret" jdbcType="VARCHAR" />
+    <result column="fweibouserid" property="fweibouserid" jdbcType="VARCHAR" />
+    <result column="fregstate" property="fregstate" jdbcType="CHAR" />
+    <result column="fuseraccount" property="fuseraccount" jdbcType="VARCHAR" />
+    <result column="fphone" property="fphone" jdbcType="VARCHAR" />
+    <result column="fdomainuser" property="fdomainuser" jdbcType="VARCHAR" />
+    <result column="fusertype" property="fusertype" jdbcType="CHAR" />
+    <result column="femail" property="femail" jdbcType="VARCHAR" />
+    <result column="fdynamicpasswordid" property="fdynamicpasswordid" jdbcType="INTEGER" />
+    <result column="fsocialid" property="fsocialid" jdbcType="VARCHAR" />
+    <result column="fenableuserid" property="fenableuserid" jdbcType="INTEGER" />
+    <result column="fenabletime" property="fenabletime" jdbcType="TIMESTAMP" />
+    <result column="fdisableuserid" property="fdisableuserid" jdbcType="INTEGER" />
+    <result column="fdisabletime" property="fdisabletime" jdbcType="TIMESTAMP" />
+    <result column="fappgroup" property="fappgroup" jdbcType="VARCHAR" />
+    <result column="fkdpassportid" property="fkdpassportid" jdbcType="VARCHAR" />
+    <result column="fsex" property="fsex" jdbcType="CHAR" />
+    <result column="fsignetpath" property="fsignetpath" jdbcType="VARCHAR" />
+    <result column="ffaceuid" property="ffaceuid" jdbcType="VARCHAR" />
+    <result column="fislockterminal" property="fislockterminal" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.kingcai.entity.TSecUserWithBLOBs" extends="BaseResultMap" >
+    <result column="fsignet" property="fsignet" jdbcType="LONGVARCHAR" />
+    <result column="ffaceimg" property="ffaceimg" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <!-- 根据姓名查询 -->
+  <select id="getByUsername" parameterType="String" resultType="cn.kingcai.entity.TSecUser">
+		select * from t_sec_user where fname=#{username}
+  </select>
+
+  
+  <!-- 逆向生成 -->
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fuserid, fname, fprimarygroup, fdescription, fempid, ftype, fpassword, fislock, funlocktime, 
+    fpwdvaliddate, fpwdmodifyvaliddate, fissystemgen, flogincount, ferrorcount, fsid, 
+    fforbidstatus, fcreateorg, fcreatedate, fcreatorid, flinkobject, fmemo, fmbaccont, 
+    faccesstoken, ftokensecret, fweibouserid, fregstate, fuseraccount, fphone, fdomainuser, 
+    fusertype, femail, fdynamicpasswordid, fsocialid, fenableuserid, fenabletime, fdisableuserid, 
+    fdisabletime, fappgroup, fkdpassportid, fsex, fsignetpath, ffaceuid, fislockterminal
+  </sql>
+  <sql id="Blob_Column_List" >
+    fsignet, ffaceimg
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="cn.kingcai.entity.TSecUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_sec_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kingcai.entity.TSecUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sec_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.kingcai.entity.TSecUserExample" >
+    delete from t_sec_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.kingcai.entity.TSecUserWithBLOBs" >
+    insert into t_sec_user (fuserid, fname, fprimarygroup, 
+      fdescription, fempid, ftype, 
+      fpassword, fislock, funlocktime, 
+      fpwdvaliddate, fpwdmodifyvaliddate, 
+      fissystemgen, flogincount, ferrorcount, 
+      fsid, fforbidstatus, fcreateorg, 
+      fcreatedate, fcreatorid, flinkobject, 
+      fmemo, fmbaccont, faccesstoken, 
+      ftokensecret, fweibouserid, fregstate, 
+      fuseraccount, fphone, fdomainuser, 
+      fusertype, femail, fdynamicpasswordid, 
+      fsocialid, fenableuserid, fenabletime, 
+      fdisableuserid, fdisabletime, fappgroup, 
+      fkdpassportid, fsex, fsignetpath, 
+      ffaceuid, fislockterminal, fsignet, 
+      ffaceimg)
+    values (#{fuserid,jdbcType=INTEGER}, #{fname,jdbcType=VARCHAR}, #{fprimarygroup,jdbcType=INTEGER}, 
+      #{fdescription,jdbcType=VARCHAR}, #{fempid,jdbcType=INTEGER}, #{ftype,jdbcType=VARCHAR}, 
+      #{fpassword,jdbcType=VARCHAR}, #{fislock,jdbcType=CHAR}, #{funlocktime,jdbcType=TIMESTAMP}, 
+      #{fpwdvaliddate,jdbcType=TIMESTAMP}, #{fpwdmodifyvaliddate,jdbcType=TIMESTAMP}, 
+      #{fissystemgen,jdbcType=CHAR}, #{flogincount,jdbcType=INTEGER}, #{ferrorcount,jdbcType=INTEGER}, 
+      #{fsid,jdbcType=VARCHAR}, #{fforbidstatus,jdbcType=CHAR}, #{fcreateorg,jdbcType=INTEGER}, 
+      #{fcreatedate,jdbcType=TIMESTAMP}, #{fcreatorid,jdbcType=INTEGER}, #{flinkobject,jdbcType=INTEGER}, 
+      #{fmemo,jdbcType=VARCHAR}, #{fmbaccont,jdbcType=VARCHAR}, #{faccesstoken,jdbcType=VARCHAR}, 
+      #{ftokensecret,jdbcType=VARCHAR}, #{fweibouserid,jdbcType=VARCHAR}, #{fregstate,jdbcType=CHAR}, 
+      #{fuseraccount,jdbcType=VARCHAR}, #{fphone,jdbcType=VARCHAR}, #{fdomainuser,jdbcType=VARCHAR}, 
+      #{fusertype,jdbcType=CHAR}, #{femail,jdbcType=VARCHAR}, #{fdynamicpasswordid,jdbcType=INTEGER}, 
+      #{fsocialid,jdbcType=VARCHAR}, #{fenableuserid,jdbcType=INTEGER}, #{fenabletime,jdbcType=TIMESTAMP}, 
+      #{fdisableuserid,jdbcType=INTEGER}, #{fdisabletime,jdbcType=TIMESTAMP}, #{fappgroup,jdbcType=VARCHAR}, 
+      #{fkdpassportid,jdbcType=VARCHAR}, #{fsex,jdbcType=CHAR}, #{fsignetpath,jdbcType=VARCHAR}, 
+      #{ffaceuid,jdbcType=VARCHAR}, #{fislockterminal,jdbcType=CHAR}, #{fsignet,jdbcType=LONGVARCHAR}, 
+      #{ffaceimg,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.kingcai.entity.TSecUserWithBLOBs" >
+    insert into t_sec_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fuserid != null" >
+        fuserid,
+      </if>
+      <if test="fname != null" >
+        fname,
+      </if>
+      <if test="fprimarygroup != null" >
+        fprimarygroup,
+      </if>
+      <if test="fdescription != null" >
+        fdescription,
+      </if>
+      <if test="fempid != null" >
+        fempid,
+      </if>
+      <if test="ftype != null" >
+        ftype,
+      </if>
+      <if test="fpassword != null" >
+        fpassword,
+      </if>
+      <if test="fislock != null" >
+        fislock,
+      </if>
+      <if test="funlocktime != null" >
+        funlocktime,
+      </if>
+      <if test="fpwdvaliddate != null" >
+        fpwdvaliddate,
+      </if>
+      <if test="fpwdmodifyvaliddate != null" >
+        fpwdmodifyvaliddate,
+      </if>
+      <if test="fissystemgen != null" >
+        fissystemgen,
+      </if>
+      <if test="flogincount != null" >
+        flogincount,
+      </if>
+      <if test="ferrorcount != null" >
+        ferrorcount,
+      </if>
+      <if test="fsid != null" >
+        fsid,
+      </if>
+      <if test="fforbidstatus != null" >
+        fforbidstatus,
+      </if>
+      <if test="fcreateorg != null" >
+        fcreateorg,
+      </if>
+      <if test="fcreatedate != null" >
+        fcreatedate,
+      </if>
+      <if test="fcreatorid != null" >
+        fcreatorid,
+      </if>
+      <if test="flinkobject != null" >
+        flinkobject,
+      </if>
+      <if test="fmemo != null" >
+        fmemo,
+      </if>
+      <if test="fmbaccont != null" >
+        fmbaccont,
+      </if>
+      <if test="faccesstoken != null" >
+        faccesstoken,
+      </if>
+      <if test="ftokensecret != null" >
+        ftokensecret,
+      </if>
+      <if test="fweibouserid != null" >
+        fweibouserid,
+      </if>
+      <if test="fregstate != null" >
+        fregstate,
+      </if>
+      <if test="fuseraccount != null" >
+        fuseraccount,
+      </if>
+      <if test="fphone != null" >
+        fphone,
+      </if>
+      <if test="fdomainuser != null" >
+        fdomainuser,
+      </if>
+      <if test="fusertype != null" >
+        fusertype,
+      </if>
+      <if test="femail != null" >
+        femail,
+      </if>
+      <if test="fdynamicpasswordid != null" >
+        fdynamicpasswordid,
+      </if>
+      <if test="fsocialid != null" >
+        fsocialid,
+      </if>
+      <if test="fenableuserid != null" >
+        fenableuserid,
+      </if>
+      <if test="fenabletime != null" >
+        fenabletime,
+      </if>
+      <if test="fdisableuserid != null" >
+        fdisableuserid,
+      </if>
+      <if test="fdisabletime != null" >
+        fdisabletime,
+      </if>
+      <if test="fappgroup != null" >
+        fappgroup,
+      </if>
+      <if test="fkdpassportid != null" >
+        fkdpassportid,
+      </if>
+      <if test="fsex != null" >
+        fsex,
+      </if>
+      <if test="fsignetpath != null" >
+        fsignetpath,
+      </if>
+      <if test="ffaceuid != null" >
+        ffaceuid,
+      </if>
+      <if test="fislockterminal != null" >
+        fislockterminal,
+      </if>
+      <if test="fsignet != null" >
+        fsignet,
+      </if>
+      <if test="ffaceimg != null" >
+        ffaceimg,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fuserid != null" >
+        #{fuserid,jdbcType=INTEGER},
+      </if>
+      <if test="fname != null" >
+        #{fname,jdbcType=VARCHAR},
+      </if>
+      <if test="fprimarygroup != null" >
+        #{fprimarygroup,jdbcType=INTEGER},
+      </if>
+      <if test="fdescription != null" >
+        #{fdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="fempid != null" >
+        #{fempid,jdbcType=INTEGER},
+      </if>
+      <if test="ftype != null" >
+        #{ftype,jdbcType=VARCHAR},
+      </if>
+      <if test="fpassword != null" >
+        #{fpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="fislock != null" >
+        #{fislock,jdbcType=CHAR},
+      </if>
+      <if test="funlocktime != null" >
+        #{funlocktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fpwdvaliddate != null" >
+        #{fpwdvaliddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fpwdmodifyvaliddate != null" >
+        #{fpwdmodifyvaliddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fissystemgen != null" >
+        #{fissystemgen,jdbcType=CHAR},
+      </if>
+      <if test="flogincount != null" >
+        #{flogincount,jdbcType=INTEGER},
+      </if>
+      <if test="ferrorcount != null" >
+        #{ferrorcount,jdbcType=INTEGER},
+      </if>
+      <if test="fsid != null" >
+        #{fsid,jdbcType=VARCHAR},
+      </if>
+      <if test="fforbidstatus != null" >
+        #{fforbidstatus,jdbcType=CHAR},
+      </if>
+      <if test="fcreateorg != null" >
+        #{fcreateorg,jdbcType=INTEGER},
+      </if>
+      <if test="fcreatedate != null" >
+        #{fcreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreatorid != null" >
+        #{fcreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="flinkobject != null" >
+        #{flinkobject,jdbcType=INTEGER},
+      </if>
+      <if test="fmemo != null" >
+        #{fmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="fmbaccont != null" >
+        #{fmbaccont,jdbcType=VARCHAR},
+      </if>
+      <if test="faccesstoken != null" >
+        #{faccesstoken,jdbcType=VARCHAR},
+      </if>
+      <if test="ftokensecret != null" >
+        #{ftokensecret,jdbcType=VARCHAR},
+      </if>
+      <if test="fweibouserid != null" >
+        #{fweibouserid,jdbcType=VARCHAR},
+      </if>
+      <if test="fregstate != null" >
+        #{fregstate,jdbcType=CHAR},
+      </if>
+      <if test="fuseraccount != null" >
+        #{fuseraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="fphone != null" >
+        #{fphone,jdbcType=VARCHAR},
+      </if>
+      <if test="fdomainuser != null" >
+        #{fdomainuser,jdbcType=VARCHAR},
+      </if>
+      <if test="fusertype != null" >
+        #{fusertype,jdbcType=CHAR},
+      </if>
+      <if test="femail != null" >
+        #{femail,jdbcType=VARCHAR},
+      </if>
+      <if test="fdynamicpasswordid != null" >
+        #{fdynamicpasswordid,jdbcType=INTEGER},
+      </if>
+      <if test="fsocialid != null" >
+        #{fsocialid,jdbcType=VARCHAR},
+      </if>
+      <if test="fenableuserid != null" >
+        #{fenableuserid,jdbcType=INTEGER},
+      </if>
+      <if test="fenabletime != null" >
+        #{fenabletime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fdisableuserid != null" >
+        #{fdisableuserid,jdbcType=INTEGER},
+      </if>
+      <if test="fdisabletime != null" >
+        #{fdisabletime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fappgroup != null" >
+        #{fappgroup,jdbcType=VARCHAR},
+      </if>
+      <if test="fkdpassportid != null" >
+        #{fkdpassportid,jdbcType=VARCHAR},
+      </if>
+      <if test="fsex != null" >
+        #{fsex,jdbcType=CHAR},
+      </if>
+      <if test="fsignetpath != null" >
+        #{fsignetpath,jdbcType=VARCHAR},
+      </if>
+      <if test="ffaceuid != null" >
+        #{ffaceuid,jdbcType=VARCHAR},
+      </if>
+      <if test="fislockterminal != null" >
+        #{fislockterminal,jdbcType=CHAR},
+      </if>
+      <if test="fsignet != null" >
+        #{fsignet,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="ffaceimg != null" >
+        #{ffaceimg,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.kingcai.entity.TSecUserExample" resultType="java.lang.Integer" >
+    select count(*) from t_sec_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_sec_user
+    <set >
+      <if test="record.fuserid != null" >
+        fuserid = #{record.fuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fname != null" >
+        fname = #{record.fname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fprimarygroup != null" >
+        fprimarygroup = #{record.fprimarygroup,jdbcType=INTEGER},
+      </if>
+      <if test="record.fdescription != null" >
+        fdescription = #{record.fdescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fempid != null" >
+        fempid = #{record.fempid,jdbcType=INTEGER},
+      </if>
+      <if test="record.ftype != null" >
+        ftype = #{record.ftype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fpassword != null" >
+        fpassword = #{record.fpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fislock != null" >
+        fislock = #{record.fislock,jdbcType=CHAR},
+      </if>
+      <if test="record.funlocktime != null" >
+        funlocktime = #{record.funlocktime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fpwdvaliddate != null" >
+        fpwdvaliddate = #{record.fpwdvaliddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fpwdmodifyvaliddate != null" >
+        fpwdmodifyvaliddate = #{record.fpwdmodifyvaliddate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fissystemgen != null" >
+        fissystemgen = #{record.fissystemgen,jdbcType=CHAR},
+      </if>
+      <if test="record.flogincount != null" >
+        flogincount = #{record.flogincount,jdbcType=INTEGER},
+      </if>
+      <if test="record.ferrorcount != null" >
+        ferrorcount = #{record.ferrorcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.fsid != null" >
+        fsid = #{record.fsid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fforbidstatus != null" >
+        fforbidstatus = #{record.fforbidstatus,jdbcType=CHAR},
+      </if>
+      <if test="record.fcreateorg != null" >
+        fcreateorg = #{record.fcreateorg,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcreatedate != null" >
+        fcreatedate = #{record.fcreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fcreatorid != null" >
+        fcreatorid = #{record.fcreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.flinkobject != null" >
+        flinkobject = #{record.flinkobject,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmemo != null" >
+        fmemo = #{record.fmemo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fmbaccont != null" >
+        fmbaccont = #{record.fmbaccont,jdbcType=VARCHAR},
+      </if>
+      <if test="record.faccesstoken != null" >
+        faccesstoken = #{record.faccesstoken,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ftokensecret != null" >
+        ftokensecret = #{record.ftokensecret,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fweibouserid != null" >
+        fweibouserid = #{record.fweibouserid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fregstate != null" >
+        fregstate = #{record.fregstate,jdbcType=CHAR},
+      </if>
+      <if test="record.fuseraccount != null" >
+        fuseraccount = #{record.fuseraccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fphone != null" >
+        fphone = #{record.fphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fdomainuser != null" >
+        fdomainuser = #{record.fdomainuser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fusertype != null" >
+        fusertype = #{record.fusertype,jdbcType=CHAR},
+      </if>
+      <if test="record.femail != null" >
+        femail = #{record.femail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fdynamicpasswordid != null" >
+        fdynamicpasswordid = #{record.fdynamicpasswordid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fsocialid != null" >
+        fsocialid = #{record.fsocialid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fenableuserid != null" >
+        fenableuserid = #{record.fenableuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fenabletime != null" >
+        fenabletime = #{record.fenabletime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fdisableuserid != null" >
+        fdisableuserid = #{record.fdisableuserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fdisabletime != null" >
+        fdisabletime = #{record.fdisabletime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fappgroup != null" >
+        fappgroup = #{record.fappgroup,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fkdpassportid != null" >
+        fkdpassportid = #{record.fkdpassportid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fsex != null" >
+        fsex = #{record.fsex,jdbcType=CHAR},
+      </if>
+      <if test="record.fsignetpath != null" >
+        fsignetpath = #{record.fsignetpath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ffaceuid != null" >
+        ffaceuid = #{record.ffaceuid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fislockterminal != null" >
+        fislockterminal = #{record.fislockterminal,jdbcType=CHAR},
+      </if>
+      <if test="record.fsignet != null" >
+        fsignet = #{record.fsignet,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.ffaceimg != null" >
+        ffaceimg = #{record.ffaceimg,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update t_sec_user
+    set fuserid = #{record.fuserid,jdbcType=INTEGER},
+      fname = #{record.fname,jdbcType=VARCHAR},
+      fprimarygroup = #{record.fprimarygroup,jdbcType=INTEGER},
+      fdescription = #{record.fdescription,jdbcType=VARCHAR},
+      fempid = #{record.fempid,jdbcType=INTEGER},
+      ftype = #{record.ftype,jdbcType=VARCHAR},
+      fpassword = #{record.fpassword,jdbcType=VARCHAR},
+      fislock = #{record.fislock,jdbcType=CHAR},
+      funlocktime = #{record.funlocktime,jdbcType=TIMESTAMP},
+      fpwdvaliddate = #{record.fpwdvaliddate,jdbcType=TIMESTAMP},
+      fpwdmodifyvaliddate = #{record.fpwdmodifyvaliddate,jdbcType=TIMESTAMP},
+      fissystemgen = #{record.fissystemgen,jdbcType=CHAR},
+      flogincount = #{record.flogincount,jdbcType=INTEGER},
+      ferrorcount = #{record.ferrorcount,jdbcType=INTEGER},
+      fsid = #{record.fsid,jdbcType=VARCHAR},
+      fforbidstatus = #{record.fforbidstatus,jdbcType=CHAR},
+      fcreateorg = #{record.fcreateorg,jdbcType=INTEGER},
+      fcreatedate = #{record.fcreatedate,jdbcType=TIMESTAMP},
+      fcreatorid = #{record.fcreatorid,jdbcType=INTEGER},
+      flinkobject = #{record.flinkobject,jdbcType=INTEGER},
+      fmemo = #{record.fmemo,jdbcType=VARCHAR},
+      fmbaccont = #{record.fmbaccont,jdbcType=VARCHAR},
+      faccesstoken = #{record.faccesstoken,jdbcType=VARCHAR},
+      ftokensecret = #{record.ftokensecret,jdbcType=VARCHAR},
+      fweibouserid = #{record.fweibouserid,jdbcType=VARCHAR},
+      fregstate = #{record.fregstate,jdbcType=CHAR},
+      fuseraccount = #{record.fuseraccount,jdbcType=VARCHAR},
+      fphone = #{record.fphone,jdbcType=VARCHAR},
+      fdomainuser = #{record.fdomainuser,jdbcType=VARCHAR},
+      fusertype = #{record.fusertype,jdbcType=CHAR},
+      femail = #{record.femail,jdbcType=VARCHAR},
+      fdynamicpasswordid = #{record.fdynamicpasswordid,jdbcType=INTEGER},
+      fsocialid = #{record.fsocialid,jdbcType=VARCHAR},
+      fenableuserid = #{record.fenableuserid,jdbcType=INTEGER},
+      fenabletime = #{record.fenabletime,jdbcType=TIMESTAMP},
+      fdisableuserid = #{record.fdisableuserid,jdbcType=INTEGER},
+      fdisabletime = #{record.fdisabletime,jdbcType=TIMESTAMP},
+      fappgroup = #{record.fappgroup,jdbcType=VARCHAR},
+      fkdpassportid = #{record.fkdpassportid,jdbcType=VARCHAR},
+      fsex = #{record.fsex,jdbcType=CHAR},
+      fsignetpath = #{record.fsignetpath,jdbcType=VARCHAR},
+      ffaceuid = #{record.ffaceuid,jdbcType=VARCHAR},
+      fislockterminal = #{record.fislockterminal,jdbcType=CHAR},
+      fsignet = #{record.fsignet,jdbcType=LONGVARCHAR},
+      ffaceimg = #{record.ffaceimg,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_sec_user
+    set fuserid = #{record.fuserid,jdbcType=INTEGER},
+      fname = #{record.fname,jdbcType=VARCHAR},
+      fprimarygroup = #{record.fprimarygroup,jdbcType=INTEGER},
+      fdescription = #{record.fdescription,jdbcType=VARCHAR},
+      fempid = #{record.fempid,jdbcType=INTEGER},
+      ftype = #{record.ftype,jdbcType=VARCHAR},
+      fpassword = #{record.fpassword,jdbcType=VARCHAR},
+      fislock = #{record.fislock,jdbcType=CHAR},
+      funlocktime = #{record.funlocktime,jdbcType=TIMESTAMP},
+      fpwdvaliddate = #{record.fpwdvaliddate,jdbcType=TIMESTAMP},
+      fpwdmodifyvaliddate = #{record.fpwdmodifyvaliddate,jdbcType=TIMESTAMP},
+      fissystemgen = #{record.fissystemgen,jdbcType=CHAR},
+      flogincount = #{record.flogincount,jdbcType=INTEGER},
+      ferrorcount = #{record.ferrorcount,jdbcType=INTEGER},
+      fsid = #{record.fsid,jdbcType=VARCHAR},
+      fforbidstatus = #{record.fforbidstatus,jdbcType=CHAR},
+      fcreateorg = #{record.fcreateorg,jdbcType=INTEGER},
+      fcreatedate = #{record.fcreatedate,jdbcType=TIMESTAMP},
+      fcreatorid = #{record.fcreatorid,jdbcType=INTEGER},
+      flinkobject = #{record.flinkobject,jdbcType=INTEGER},
+      fmemo = #{record.fmemo,jdbcType=VARCHAR},
+      fmbaccont = #{record.fmbaccont,jdbcType=VARCHAR},
+      faccesstoken = #{record.faccesstoken,jdbcType=VARCHAR},
+      ftokensecret = #{record.ftokensecret,jdbcType=VARCHAR},
+      fweibouserid = #{record.fweibouserid,jdbcType=VARCHAR},
+      fregstate = #{record.fregstate,jdbcType=CHAR},
+      fuseraccount = #{record.fuseraccount,jdbcType=VARCHAR},
+      fphone = #{record.fphone,jdbcType=VARCHAR},
+      fdomainuser = #{record.fdomainuser,jdbcType=VARCHAR},
+      fusertype = #{record.fusertype,jdbcType=CHAR},
+      femail = #{record.femail,jdbcType=VARCHAR},
+      fdynamicpasswordid = #{record.fdynamicpasswordid,jdbcType=INTEGER},
+      fsocialid = #{record.fsocialid,jdbcType=VARCHAR},
+      fenableuserid = #{record.fenableuserid,jdbcType=INTEGER},
+      fenabletime = #{record.fenabletime,jdbcType=TIMESTAMP},
+      fdisableuserid = #{record.fdisableuserid,jdbcType=INTEGER},
+      fdisabletime = #{record.fdisabletime,jdbcType=TIMESTAMP},
+      fappgroup = #{record.fappgroup,jdbcType=VARCHAR},
+      fkdpassportid = #{record.fkdpassportid,jdbcType=VARCHAR},
+      fsex = #{record.fsex,jdbcType=CHAR},
+      fsignetpath = #{record.fsignetpath,jdbcType=VARCHAR},
+      ffaceuid = #{record.ffaceuid,jdbcType=VARCHAR},
+      fislockterminal = #{record.fislockterminal,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

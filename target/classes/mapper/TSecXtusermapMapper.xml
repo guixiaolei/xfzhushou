@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kingcai.dao.TSecXtusermapMapper" >
+  <resultMap id="BaseResultMap" type="cn.kingcai.entity.TSecXtusermap" >
+    <result column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="fopenid" property="fopenid" jdbcType="VARCHAR" />
+    <result column="fphone" property="fphone" jdbcType="VARCHAR" />
+    <result column="fusername" property="fusername" jdbcType="VARCHAR" />
+    <result column="fbelongdept" property="fbelongdept" jdbcType="VARCHAR" />
+    <result column="fposition" property="fposition" jdbcType="VARCHAR" />
+    <result column="femail" property="femail" jdbcType="VARCHAR" />
+    <result column="fuserid" property="fuserid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fid, fopenid, fphone, fusername, fbelongdept, fposition, femail, fuserid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kingcai.entity.TSecXtusermapExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_sec_xtusermap
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.kingcai.entity.TSecXtusermapExample" >
+    delete from t_sec_xtusermap
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.kingcai.entity.TSecXtusermap" >
+    insert into t_sec_xtusermap (fid, fopenid, fphone, 
+      fusername, fbelongdept, fposition, 
+      femail, fuserid)
+    values (#{fid,jdbcType=BIGINT}, #{fopenid,jdbcType=VARCHAR}, #{fphone,jdbcType=VARCHAR}, 
+      #{fusername,jdbcType=VARCHAR}, #{fbelongdept,jdbcType=VARCHAR}, #{fposition,jdbcType=VARCHAR}, 
+      #{femail,jdbcType=VARCHAR}, #{fuserid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.kingcai.entity.TSecXtusermap" >
+    insert into t_sec_xtusermap
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fopenid != null" >
+        fopenid,
+      </if>
+      <if test="fphone != null" >
+        fphone,
+      </if>
+      <if test="fusername != null" >
+        fusername,
+      </if>
+      <if test="fbelongdept != null" >
+        fbelongdept,
+      </if>
+      <if test="fposition != null" >
+        fposition,
+      </if>
+      <if test="femail != null" >
+        femail,
+      </if>
+      <if test="fuserid != null" >
+        fuserid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="fopenid != null" >
+        #{fopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="fphone != null" >
+        #{fphone,jdbcType=VARCHAR},
+      </if>
+      <if test="fusername != null" >
+        #{fusername,jdbcType=VARCHAR},
+      </if>
+      <if test="fbelongdept != null" >
+        #{fbelongdept,jdbcType=VARCHAR},
+      </if>
+      <if test="fposition != null" >
+        #{fposition,jdbcType=VARCHAR},
+      </if>
+      <if test="femail != null" >
+        #{femail,jdbcType=VARCHAR},
+      </if>
+      <if test="fuserid != null" >
+        #{fuserid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.kingcai.entity.TSecXtusermapExample" resultType="java.lang.Integer" >
+    select count(*) from t_sec_xtusermap
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_sec_xtusermap
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fopenid != null" >
+        fopenid = #{record.fopenid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fphone != null" >
+        fphone = #{record.fphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fusername != null" >
+        fusername = #{record.fusername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fbelongdept != null" >
+        fbelongdept = #{record.fbelongdept,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fposition != null" >
+        fposition = #{record.fposition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.femail != null" >
+        femail = #{record.femail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fuserid != null" >
+        fuserid = #{record.fuserid,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_sec_xtusermap
+    set fid = #{record.fid,jdbcType=BIGINT},
+      fopenid = #{record.fopenid,jdbcType=VARCHAR},
+      fphone = #{record.fphone,jdbcType=VARCHAR},
+      fusername = #{record.fusername,jdbcType=VARCHAR},
+      fbelongdept = #{record.fbelongdept,jdbcType=VARCHAR},
+      fposition = #{record.fposition,jdbcType=VARCHAR},
+      femail = #{record.femail,jdbcType=VARCHAR},
+      fuserid = #{record.fuserid,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

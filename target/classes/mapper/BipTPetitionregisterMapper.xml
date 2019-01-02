@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kingcai.dao.BipTPetitionregisterMapper" >
+  <resultMap id="BaseResultMap" type="cn.kingcai.entity.BipTPetitionregister" >
+    <result column="fid" property="fid" jdbcType="VARCHAR" />
+    <result column="fbillno" property="fbillno" jdbcType="VARCHAR" />
+    <result column="fdocumentstatus" property="fdocumentstatus" jdbcType="CHAR" />
+    <result column="f_bip_birthdate" property="fBipBirthdate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_nation" property="fBipNation" jdbcType="VARCHAR" />
+    <result column="f_bip_petitionerphone" property="fBipPetitionerphone" jdbcType="VARCHAR" />
+    <result column="f_bip_representatives" property="fBipPetitionername" jdbcType="VARCHAR" />
+    <result column="f_bip_representativenumberid" property="fBipComplainantsnumerid" jdbcType="VARCHAR" />
+    <result column="f_bip_sex" property="fBipSex" jdbcType="VARCHAR" />
+    <result column="f_bip_recentphotos" property="fBipRecentphotos" jdbcType="VARCHAR" />
+    <result column="f_bip_thirdclassify" property="fBipThirdclassify" jdbcType="VARCHAR" />
+    <result column="f_bip_petitionersnumber" property="fBipPetitionersnumber" jdbcType="INTEGER" />
+    <result column="f_bip_firstclassify" property="fBipFirstclassify" jdbcType="VARCHAR" />
+    <result column="f_bip_secondclassify" property="fBipSecondclassify" jdbcType="VARCHAR" />
+    <result column="f_bip_petitiontype" property="fBipPetitiontype" jdbcType="INTEGER" />
+    <result column="f_bip_poweraffairs" property="fBipPoweraffairs" jdbcType="INTEGER" />
+    <result column="f_bip_remarks" property="fBipRemarks" jdbcType="VARCHAR" />
+    <result column="f_bip_ismanualentry" property="fBipIsmanualentry" jdbcType="CHAR" />
+    <result column="fcreatedate" property="fcreatedate" jdbcType="TIMESTAMP" />
+    <result column="fcreatorid" property="fcreatorid" jdbcType="INTEGER" />
+    <result column="fmodifierid" property="fmodifierid" jdbcType="INTEGER" />
+    <result column="fmodifydate" property="fmodifydate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_checkdate" property="fBipCheckdate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_address" property="fBipAddress" jdbcType="VARCHAR" />
+    <result column="f_bip_nativeplace" property="fBipNativeplace" jdbcType="VARCHAR" />
+    <result column="f_bip_userid" property="fBipUserid" jdbcType="INTEGER" />
+    <result column="f_bip_integer" property="fBipInteger" jdbcType="INTEGER" />
+    <result column="fpashdownstatus" property="fpashdownstatus" jdbcType="CHAR" />
+    <result column="f_bip_orgid" property="fBipOrgid" jdbcType="INTEGER" />
+    <result column="f_bip_visitcount" property="fBipVisitcount" jdbcType="INTEGER" />
+    <result column="f_bip_remark" property="fBipRemark" jdbcType="VARCHAR" />
+    <result column="f_bip_headimage" property="fBipHeadimage" jdbcType="VARCHAR" />
+    <result column="f_bip_politicaloutlook" property="fBipPoliticaloutlook" jdbcType="VARCHAR" />
+    <result column="f_bip_issendmessage" property="fBipIssendmessage" jdbcType="CHAR" />
+  </resultMap>
+  <!-- 查询一级分类 -->
+  <select id="selectFirstclass" resultType="java.util.HashMap">
+  		SELECT	fentryid as fBipFirstclassify, fdatavalue from v_firstclassify
+  </select>
+  <!-- 根据一级id查询二级分类 -->
+  <select id="findByParentId1" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select fentryid as fBipSecondclassify, fdatavalue from v_secondclassify 
+		where fparentid= #{fBipFirstclassify}	
+  </select>
+  
+  <!-- 根据二级id查询三级分类 -->
+  <select id="findByParentId2" parameterType="java.lang.String" resultType="java.util.HashMap">
+		select fentryid as fBipThirdclassify, fdatavalue from v_thirdclassify 
+		where fparentid= #{fBipSecondclassify}
+  </select>
+  
+  <!-- 查询政治面貌 -->
+  <select id="findOutlook" resultType="java.util.HashMap">
+	select fpkid as fBipPoliticaloutlook, fcaption from v_politicaloutlook
+  </select>
+  <!-- 查询信访列表 -->
+  <select id="selectRegisterList" resultType="java.util.HashMap">
+  SELECT
+	fbillno,
+	f_bip_representatives,
+	f_bip_petitiontype,
+	f_bip_petitionersnumber,
+	f_bip_petitionerphone,
+	f_bip_remarks,
+	( SELECT fname FROM bip_t_poweraffairs WHERE fid = F_BIP_PowerAffairs )  as poweraffair,
+	( SELECT f_bip_director FROM bip_t_poweraffairs WHERE fid = F_BIP_PowerAffairs ) as directorName,
+	( SELECT username FROM t_user WHERE id = FCreatorId ) as petitionerName,
+	FCreateDate 
+FROM
+	bip_t_petitionregister
+  </select>
+  
+  <!-- 添加信访联系人 -->
+  <insert id="insert" parameterType="cn.kingcai.entity.BipTPetitionregister" >
+    insert into bip_t_petitionregister (fid, fbillno, fdocumentstatus, 
+      f_bip_birthdate, f_bip_nation, f_bip_petitionerphone, 
+      f_bip_representatives, f_bip_representativenumberid, 
+      f_bip_sex, f_bip_recentphotos, f_bip_thirdclassify, 
+      f_bip_petitionersnumber, f_bip_firstclassify, 
+      f_bip_secondclassify, f_bip_petitiontype, f_bip_poweraffairs, 
+      f_bip_remarks, f_bip_ismanualentry, fcreatedate, 
+      fcreatorid, fmodifierid, fmodifydate, 
+      f_bip_checkdate, f_bip_address, f_bip_nativeplace, 
+      f_bip_userid, f_bip_integer, fpashdownstatus, 
+      f_bip_orgid, f_bip_visitcount, f_bip_remark, 
+      f_bip_headimage, f_bip_politicaloutlook, f_bip_issendmessage
+      )
+    values (#{fid,jdbcType=VARCHAR}, #{fbillno,jdbcType=VARCHAR}, #{fdocumentstatus,jdbcType=CHAR}, 
+      #{fBipBirthdate,jdbcType=TIMESTAMP}, #{fBipNation,jdbcType=VARCHAR}, #{fBipPetitionerphone,jdbcType=VARCHAR}, 
+      #{fBipPetitionername,jdbcType=VARCHAR}, #{fBipComplainantsnumerid,jdbcType=VARCHAR}, 
+      #{fBipSex,jdbcType=VARCHAR}, #{fBipRecentphotos,jdbcType=VARCHAR}, #{fBipThirdclassify,jdbcType=VARCHAR}, 
+      #{fBipPetitionersnumber,jdbcType=INTEGER}, #{fBipFirstclassify,jdbcType=VARCHAR}, 
+      #{fBipSecondclassify,jdbcType=VARCHAR}, #{fBipPetitiontype,jdbcType=INTEGER}, #{fBipPoweraffairs,jdbcType=INTEGER}, 
+      #{fBipRemarks,jdbcType=VARCHAR}, #{fBipIsmanualentry,jdbcType=CHAR}, #{fcreatedate,jdbcType=TIMESTAMP}, 
+      #{fcreatorid,jdbcType=INTEGER}, #{fmodifierid,jdbcType=INTEGER}, #{fmodifydate,jdbcType=TIMESTAMP}, 
+      #{fBipCheckdate,jdbcType=TIMESTAMP}, #{fBipAddress,jdbcType=VARCHAR}, #{fBipNativeplace,jdbcType=VARCHAR}, 
+      #{fBipUserid,jdbcType=INTEGER}, #{fBipInteger,jdbcType=INTEGER}, #{fpashdownstatus,jdbcType=CHAR}, 
+      #{fBipOrgid,jdbcType=INTEGER}, #{fBipVisitcount,jdbcType=INTEGER}, #{fBipRemark,jdbcType=VARCHAR}, 
+      #{fBipHeadimage,jdbcType=VARCHAR}, #{fBipPoliticaloutlook,jdbcType=VARCHAR}, #{fBipIssendmessage,jdbcType=CHAR}
+      )
+  </insert>
+  <!-- 修改时回显数据 -->
+  <select id="showDataList" resultType="java.util.HashMap">
+  	SELECT
+	fbillno ,
+	fdocumentstatus,
+	f_bip_birthdate as fBipBirthdate,
+	f_bip_nation as fBipNation,
+	f_bip_petitionerphone as fBipPetitionerphone,
+	f_bip_representatives as fBipPetitionername,
+	f_bip_representativenumberid as fBipComplainantsnumerid,
+	f_bip_sex as fBipSex,
+	f_bip_recentphotos as fBipRecentphotos,
+	f_bip_firstclassify as fBipFirstclassify,
+	( SELECT fdatavalue FROM v_firstclassify WHERE fentryid = f_bip_firstclassify ) AS firstclass,
+	f_bip_secondclassify as fBipSecondclassify,
+	( SELECT fdatavalue FROM v_secondclassify WHERE fentryid = f_bip_secondclassify ) AS secondclass,
+	f_bip_thirdclassify as fBipThirdclassify,
+	( SELECT fdatavalue FROM v_thirdclassify WHERE fentryid = f_bip_thirdclassify ) AS thirdclass,
+	f_bip_petitionersnumber as fBipPetitionersnumber,
+	f_bip_petitiontype as fBipPetitiontype,
+	( SELECT fname FROM bip_t_typespetitions WHERE fid = f_bip_petitiontype ) AS petitionType,
+	F_BIP_PowerAffairs as fBipPoweraffairs,
+	( SELECT fname FROM bip_t_poweraffairs WHERE fid = F_BIP_PowerAffairs ) AS poweraffair,
+	f_bip_remarks as fBipRemarks,
+	f_bip_ismanualentry as fBipIsmanualentry,
+	fcreatedate,
+	fcreatorid,
+	fmodifierid,
+	(select username from t_user where id=fmodifierid) as modifierName,
+	fmodifydate,
+	(select username from t_user where id=fcreatorid) as creatorName,
+	f_bip_checkdate as fBipCheckdate,
+	f_bip_address as fBipAddress,
+	f_bip_nativeplace as fBipNativeplace,
+	f_bip_userid as fBipUserid,
+	(select username from t_user where id=f_bip_userid) as auditor,
+	f_bip_integer as fBipInteger,
+	fpashdownstatus,
+	f_bip_orgid as fBipOrgid,
+	f_bip_visitcount as fBipVisitcount,
+	f_bip_remark as fBipRemark,
+	f_bip_headimage as fBipHeadimage,
+	f_bip_politicaloutlook as fBipPoliticaloutlook,
+	(select fcaption from v_politicaloutlook where fpkid =  f_bip_politicaloutlook) as outlook
+FROM
+	bip_t_petitionregister where fid=#{fid}
+  </select>
+  
+  <!-- 更新信访联系人 -->
+  <update id="updateDataList">
+  	update bip_t_petitionregister
+    set 
+      fdocumentstatus = #{record.fdocumentstatus,jdbcType=CHAR},
+      f_bip_birthdate = #{record.fBipBirthdate,jdbcType=TIMESTAMP},
+      f_bip_nation = #{record.fBipNation,jdbcType=VARCHAR},
+      f_bip_petitionerphone = #{record.fBipPetitionerphone,jdbcType=VARCHAR},
+      f_bip_representatives = #{record.fBipPetitionername,jdbcType=VARCHAR},
+      f_bip_representativenumberid = #{record.fBipComplainantsnumerid,jdbcType=VARCHAR},
+      f_bip_sex = #{record.fBipSex,jdbcType=VARCHAR},
+      f_bip_recentphotos = #{record.fBipRecentphotos,jdbcType=VARCHAR},
+      f_bip_thirdclassify = #{record.fBipThirdclassify,jdbcType=VARCHAR},
+      f_bip_petitionersnumber = #{record.fBipPetitionersnumber,jdbcType=INTEGER},
+      f_bip_firstclassify = #{record.fBipFirstclassify,jdbcType=VARCHAR},
+      f_bip_secondclassify = #{record.fBipSecondclassify,jdbcType=VARCHAR},
+      f_bip_petitiontype = #{record.fBipPetitiontype,jdbcType=INTEGER},
+      f_bip_poweraffairs = #{record.fBipPoweraffairs,jdbcType=INTEGER},
+      f_bip_remarks = #{record.fBipRemarks,jdbcType=VARCHAR},
+      f_bip_ismanualentry = #{record.fBipIsmanualentry,jdbcType=CHAR},
+      fcreatedate = #{record.fcreatedate,jdbcType=TIMESTAMP},
+      fcreatorid = #{record.fcreatorid,jdbcType=INTEGER},
+      fmodifierid = #{record.fmodifierid,jdbcType=INTEGER},
+      fmodifydate = #{record.fmodifydate,jdbcType=TIMESTAMP},
+      f_bip_checkdate = #{record.fBipCheckdate,jdbcType=TIMESTAMP},
+      f_bip_address = #{record.fBipAddress,jdbcType=VARCHAR},
+      f_bip_nativeplace = #{record.fBipNativeplace,jdbcType=VARCHAR},
+      f_bip_userid = #{record.fBipUserid,jdbcType=INTEGER},
+      f_bip_integer = #{record.fBipInteger,jdbcType=INTEGER},
+      fpashdownstatus = #{record.fpashdownstatus,jdbcType=CHAR},
+      f_bip_orgid = #{record.fBipOrgid,jdbcType=INTEGER},
+      f_bip_visitcount = #{record.fBipVisitcount,jdbcType=INTEGER},
+      f_bip_remark = #{record.fBipRemark,jdbcType=VARCHAR},
+      f_bip_headimage = #{record.fBipHeadimage,jdbcType=VARCHAR},
+      f_bip_politicaloutlook = #{record.fBipPoliticaloutlook,jdbcType=VARCHAR},
+      f_bip_issendmessage = #{record.fBipIssendmessage,jdbcType=CHAR} 
+  </update>
+  <!-- 自动生成的 -->
+  <!-- <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fid, fbillno, fdocumentstatus, f_bip_birthdate, f_bip_nation, f_bip_petitionerphone, 
+    f_bip_representatives, f_bip_representativenumberid, f_bip_sex, f_bip_recentphotos, 
+    f_bip_thirdclassify, f_bip_petitionersnumber, f_bip_firstclassify, f_bip_secondclassify, 
+    f_bip_petitiontype, f_bip_poweraffairs, f_bip_remarks, f_bip_ismanualentry, fcreatedate, 
+    fcreatorid, fmodifierid, fmodifydate, f_bip_checkdate, f_bip_address, f_bip_nativeplace, 
+    f_bip_userid, f_bip_integer, fpashdownstatus, f_bip_orgid, f_bip_visitcount, f_bip_remark, 
+    f_bip_headimage, f_bip_politicaloutlook, f_bip_issendmessage
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kingcai.entity.BipTPetitionregisterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bip_t_petitionregister
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.kingcai.entity.BipTPetitionregisterExample" >
+    delete from bip_t_petitionregister
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  
+  <insert id="insertSelective" parameterType="cn.kingcai.entity.BipTPetitionregister" >
+    insert into bip_t_petitionregister
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fbillno != null" >
+        fbillno,
+      </if>
+      <if test="fdocumentstatus != null" >
+        fdocumentstatus,
+      </if>
+      <if test="fBipBirthdate != null" >
+        f_bip_birthdate,
+      </if>
+      <if test="fBipNation != null" >
+        f_bip_nation,
+      </if>
+      <if test="fBipPetitionerphone != null" >
+        f_bip_petitionerphone,
+      </if>
+      <if test="fBipPetitionername != null" >
+        f_bip_representatives,
+      </if>
+      <if test="fBipComplainantsnumerid != null" >
+        f_bip_representativenumberid,
+      </if>
+      <if test="fBipSex != null" >
+        f_bip_sex,
+      </if>
+      <if test="fBipRecentphotos != null" >
+        f_bip_recentphotos,
+      </if>
+      <if test="fBipThirdclassify != null" >
+        f_bip_thirdclassify,
+      </if>
+      <if test="fBipPetitionersnumber != null" >
+        f_bip_petitionersnumber,
+      </if>
+      <if test="fBipFirstclassify != null" >
+        f_bip_firstclassify,
+      </if>
+      <if test="fBipSecondclassify != null" >
+        f_bip_secondclassify,
+      </if>
+      <if test="fBipPetitiontype != null" >
+        f_bip_petitiontype,
+      </if>
+      <if test="fBipPoweraffairs != null" >
+        f_bip_poweraffairs,
+      </if>
+      <if test="fBipRemarks != null" >
+        f_bip_remarks,
+      </if>
+      <if test="fBipIsmanualentry != null" >
+        f_bip_ismanualentry,
+      </if>
+      <if test="fcreatedate != null" >
+        fcreatedate,
+      </if>
+      <if test="fcreatorid != null" >
+        fcreatorid,
+      </if>
+      <if test="fmodifierid != null" >
+        fmodifierid,
+      </if>
+      <if test="fmodifydate != null" >
+        fmodifydate,
+      </if>
+      <if test="fBipCheckdate != null" >
+        f_bip_checkdate,
+      </if>
+      <if test="fBipAddress != null" >
+        f_bip_address,
+      </if>
+      <if test="fBipNativeplace != null" >
+        f_bip_nativeplace,
+      </if>
+      <if test="fBipUserid != null" >
+        f_bip_userid,
+      </if>
+      <if test="fBipInteger != null" >
+        f_bip_integer,
+      </if>
+      <if test="fpashdownstatus != null" >
+        fpashdownstatus,
+      </if>
+      <if test="fBipOrgid != null" >
+        f_bip_orgid,
+      </if>
+      <if test="fBipVisitcount != null" >
+        f_bip_visitcount,
+      </if>
+      <if test="fBipRemark != null" >
+        f_bip_remark,
+      </if>
+      <if test="fBipHeadimage != null" >
+        f_bip_headimage,
+      </if>
+      <if test="fBipPoliticaloutlook != null" >
+        f_bip_politicaloutlook,
+      </if>
+      <if test="fBipIssendmessage != null" >
+        f_bip_issendmessage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=VARCHAR},
+      </if>
+      <if test="fbillno != null" >
+        #{fbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="fdocumentstatus != null" >
+        #{fdocumentstatus,jdbcType=CHAR},
+      </if>
+      <if test="fBipBirthdate != null" >
+        #{fBipBirthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipNation != null" >
+        #{fBipNation,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPetitionerphone != null" >
+        #{fBipPetitionerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPetitionername != null" >
+        #{fBipPetitionername,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipComplainantsnumerid != null" >
+        #{fBipComplainantsnumerid,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipSex != null" >
+        #{fBipSex,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipRecentphotos != null" >
+        #{fBipRecentphotos,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipThirdclassify != null" >
+        #{fBipThirdclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPetitionersnumber != null" >
+        #{fBipPetitionersnumber,jdbcType=INTEGER},
+      </if>
+      <if test="fBipFirstclassify != null" >
+        #{fBipFirstclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipSecondclassify != null" >
+        #{fBipSecondclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPetitiontype != null" >
+        #{fBipPetitiontype,jdbcType=INTEGER},
+      </if>
+      <if test="fBipPoweraffairs != null" >
+        #{fBipPoweraffairs,jdbcType=INTEGER},
+      </if>
+      <if test="fBipRemarks != null" >
+        #{fBipRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipIsmanualentry != null" >
+        #{fBipIsmanualentry,jdbcType=CHAR},
+      </if>
+      <if test="fcreatedate != null" >
+        #{fcreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fcreatorid != null" >
+        #{fcreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="fmodifierid != null" >
+        #{fmodifierid,jdbcType=INTEGER},
+      </if>
+      <if test="fmodifydate != null" >
+        #{fmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipCheckdate != null" >
+        #{fBipCheckdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipAddress != null" >
+        #{fBipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipNativeplace != null" >
+        #{fBipNativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipUserid != null" >
+        #{fBipUserid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipInteger != null" >
+        #{fBipInteger,jdbcType=INTEGER},
+      </if>
+      <if test="fpashdownstatus != null" >
+        #{fpashdownstatus,jdbcType=CHAR},
+      </if>
+      <if test="fBipOrgid != null" >
+        #{fBipOrgid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipVisitcount != null" >
+        #{fBipVisitcount,jdbcType=INTEGER},
+      </if>
+      <if test="fBipRemark != null" >
+        #{fBipRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipHeadimage != null" >
+        #{fBipHeadimage,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPoliticaloutlook != null" >
+        #{fBipPoliticaloutlook,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipIssendmessage != null" >
+        #{fBipIssendmessage,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.kingcai.entity.BipTPetitionregisterExample" resultType="java.lang.Integer" >
+    select count(*) from bip_t_petitionregister
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bip_t_petitionregister
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fbillno != null" >
+        fbillno = #{record.fbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fdocumentstatus != null" >
+        fdocumentstatus = #{record.fdocumentstatus,jdbcType=CHAR},
+      </if>
+      <if test="record.fBipBirthdate != null" >
+        f_bip_birthdate = #{record.fBipBirthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipNation != null" >
+        f_bip_nation = #{record.fBipNation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipPetitionerphone != null" >
+        f_bip_petitionerphone = #{record.fBipPetitionerphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipPetitionername != null" >
+        f_bip_representatives = #{record.fBipPetitionername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipComplainantsnumerid != null" >
+        f_bip_representativenumberid = #{record.fBipComplainantsnumerid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipSex != null" >
+        f_bip_sex = #{record.fBipSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipRecentphotos != null" >
+        f_bip_recentphotos = #{record.fBipRecentphotos,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipThirdclassify != null" >
+        f_bip_thirdclassify = #{record.fBipThirdclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipPetitionersnumber != null" >
+        f_bip_petitionersnumber = #{record.fBipPetitionersnumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipFirstclassify != null" >
+        f_bip_firstclassify = #{record.fBipFirstclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipSecondclassify != null" >
+        f_bip_secondclassify = #{record.fBipSecondclassify,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipPetitiontype != null" >
+        f_bip_petitiontype = #{record.fBipPetitiontype,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipPoweraffairs != null" >
+        f_bip_poweraffairs = #{record.fBipPoweraffairs,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipRemarks != null" >
+        f_bip_remarks = #{record.fBipRemarks,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipIsmanualentry != null" >
+        f_bip_ismanualentry = #{record.fBipIsmanualentry,jdbcType=CHAR},
+      </if>
+      <if test="record.fcreatedate != null" >
+        fcreatedate = #{record.fcreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fcreatorid != null" >
+        fcreatorid = #{record.fcreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmodifierid != null" >
+        fmodifierid = #{record.fmodifierid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmodifydate != null" >
+        fmodifydate = #{record.fmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipCheckdate != null" >
+        f_bip_checkdate = #{record.fBipCheckdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipAddress != null" >
+        f_bip_address = #{record.fBipAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipNativeplace != null" >
+        f_bip_nativeplace = #{record.fBipNativeplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipUserid != null" >
+        f_bip_userid = #{record.fBipUserid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipInteger != null" >
+        f_bip_integer = #{record.fBipInteger,jdbcType=INTEGER},
+      </if>
+      <if test="record.fpashdownstatus != null" >
+        fpashdownstatus = #{record.fpashdownstatus,jdbcType=CHAR},
+      </if>
+      <if test="record.fBipOrgid != null" >
+        f_bip_orgid = #{record.fBipOrgid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipVisitcount != null" >
+        f_bip_visitcount = #{record.fBipVisitcount,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipRemark != null" >
+        f_bip_remark = #{record.fBipRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipHeadimage != null" >
+        f_bip_headimage = #{record.fBipHeadimage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipPoliticaloutlook != null" >
+        f_bip_politicaloutlook = #{record.fBipPoliticaloutlook,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipIssendmessage != null" >
+        f_bip_issendmessage = #{record.fBipIssendmessage,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bip_t_petitionregister
+    set fid = #{record.fid,jdbcType=VARCHAR},
+      fbillno = #{record.fbillno,jdbcType=VARCHAR},
+      fdocumentstatus = #{record.fdocumentstatus,jdbcType=CHAR},
+      f_bip_birthdate = #{record.fBipBirthdate,jdbcType=TIMESTAMP},
+      f_bip_nation = #{record.fBipNation,jdbcType=VARCHAR},
+      f_bip_petitionerphone = #{record.fBipPetitionerphone,jdbcType=VARCHAR},
+      f_bip_representatives = #{record.fBipPetitionername,jdbcType=VARCHAR},
+      f_bip_representativenumberid = #{record.fBipComplainantsnumerid,jdbcType=VARCHAR},
+      f_bip_sex = #{record.fBipSex,jdbcType=VARCHAR},
+      f_bip_recentphotos = #{record.fBipRecentphotos,jdbcType=VARCHAR},
+      f_bip_thirdclassify = #{record.fBipThirdclassify,jdbcType=VARCHAR},
+      f_bip_petitionersnumber = #{record.fBipPetitionersnumber,jdbcType=INTEGER},
+      f_bip_firstclassify = #{record.fBipFirstclassify,jdbcType=VARCHAR},
+      f_bip_secondclassify = #{record.fBipSecondclassify,jdbcType=VARCHAR},
+      f_bip_petitiontype = #{record.fBipPetitiontype,jdbcType=INTEGER},
+      f_bip_poweraffairs = #{record.fBipPoweraffairs,jdbcType=INTEGER},
+      f_bip_remarks = #{record.fBipRemarks,jdbcType=VARCHAR},
+      f_bip_ismanualentry = #{record.fBipIsmanualentry,jdbcType=CHAR},
+      fcreatedate = #{record.fcreatedate,jdbcType=TIMESTAMP},
+      fcreatorid = #{record.fcreatorid,jdbcType=INTEGER},
+      fmodifierid = #{record.fmodifierid,jdbcType=INTEGER},
+      fmodifydate = #{record.fmodifydate,jdbcType=TIMESTAMP},
+      f_bip_checkdate = #{record.fBipCheckdate,jdbcType=TIMESTAMP},
+      f_bip_address = #{record.fBipAddress,jdbcType=VARCHAR},
+      f_bip_nativeplace = #{record.fBipNativeplace,jdbcType=VARCHAR},
+      f_bip_userid = #{record.fBipUserid,jdbcType=INTEGER},
+      f_bip_integer = #{record.fBipInteger,jdbcType=INTEGER},
+      fpashdownstatus = #{record.fpashdownstatus,jdbcType=CHAR},
+      f_bip_orgid = #{record.fBipOrgid,jdbcType=INTEGER},
+      f_bip_visitcount = #{record.fBipVisitcount,jdbcType=INTEGER},
+      f_bip_remark = #{record.fBipRemark,jdbcType=VARCHAR},
+      f_bip_headimage = #{record.fBipHeadimage,jdbcType=VARCHAR},
+      f_bip_politicaloutlook = #{record.fBipPoliticaloutlook,jdbcType=VARCHAR},
+      f_bip_issendmessage = #{record.fBipIssendmessage,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update> -->
+</mapper>

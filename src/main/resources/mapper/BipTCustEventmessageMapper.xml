@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.kingcai.dao.BipTCustEventmessageMapper" >
+  <!-- <resultMap id="BaseResultMap" type="cn.kingcai.entity.CustEventmessage" >
+    <result column="fid" property="fid" jdbcType="BIGINT" />
+    <result column="fbillno" property="fbillno" jdbcType="VARCHAR" />
+    <result column="fdocumentstatus" property="fdocumentstatus" jdbcType="CHAR" />
+    <result column="fcreatorid" property="fcreatorid" jdbcType="INTEGER" />
+    <result column="fcreatedate" property="fcreatedate" jdbcType="TIMESTAMP" />
+    <result column="fmodifierid" property="fmodifierid" jdbcType="INTEGER" />
+    <result column="fmodifydate" property="fmodifydate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_checkerid" property="fBipCheckerid" jdbcType="INTEGER" />
+    <result column="f_bip_checkdate" property="fBipCheckdate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_name" property="fBipName" jdbcType="VARCHAR" />
+    <result column="f_bip_idcard" property="fBipIdcard" jdbcType="VARCHAR" />
+    <result column="f_bip_nation" property="fBipNation" jdbcType="VARCHAR" />
+    <result column="f_bip_sex" property="fBipSex" jdbcType="VARCHAR" />
+    <result column="f_bip_tel" property="fBipTel" jdbcType="VARCHAR" />
+    <result column="f_bip_outlook" property="fBipOutlook" jdbcType="VARCHAR" />
+    <result column="f_bip_cardaddress" property="fBipCardaddress" jdbcType="VARCHAR" />
+    <result column="f_bip_nowaddress" property="fBipNowaddress" jdbcType="VARCHAR" />
+    <result column="f_bip_handwrite" property="fBipHandwrite" jdbcType="CHAR" />
+    <result column="f_bip_headimage" property="fBipHeadimage" jdbcType="VARCHAR" />
+    <result column="f_bip_recentimage" property="fBipRecentimage" jdbcType="VARCHAR" />
+    <result column="f_bip_type" property="fBipType" jdbcType="INTEGER" />
+    <result column="f_bip_firstclass" property="fBipFirstclass" jdbcType="VARCHAR" />
+    <result column="f_bip_secondclass" property="fBipSecondclass" jdbcType="VARCHAR" />
+    <result column="f_bip_thirdclass" property="fBipThirdclass" jdbcType="VARCHAR" />
+    <result column="f_bip_peoplenum" property="fBipPeoplenum" jdbcType="INTEGER" />
+    <result column="f_bip_utilname" property="fBipUtilname" jdbcType="INTEGER" />
+    <result column="f_bip_eventdetails" property="fBipEventdetails" jdbcType="VARCHAR" />
+    <result column="f_bip_eventresult" property="fBipEventresult" jdbcType="VARCHAR" />
+    <result column="f_bip_createorganization" property="fBipCreateorganization" jdbcType="INTEGER" />
+    <result column="f_bip_birthdate" property="fBipBirthdate" jdbcType="TIMESTAMP" />
+    <result column="f_bip_recepterduty" property="fBipRecepterduty" jdbcType="VARCHAR" />
+    <result column="f_bip_dutyman" property="fBipDutyman" jdbcType="VARCHAR" />
+    <result column="f_bip_dealstatus" property="fBipDealstatus" jdbcType="VARCHAR" />
+    <result column="f_bip_receptertel" property="fBipReceptertel" jdbcType="VARCHAR" />
+  </resultMap> -->
+  
+  <!-- 保存到乡镇登记单据头 -->
+  <insert id="saveToHead" parameterType="cn.kingcai.entity.CustEventmessage">
+  	insert into bip_t_cust_eventmessage (fid, fbillno, fdocumentstatus, 
+      fcreatorid, fcreatedate, fmodifierid, 
+      fmodifydate, f_bip_checkerid, f_bip_checkdate, 
+      f_bip_name, f_bip_idcard, f_bip_nation, 
+      f_bip_sex, f_bip_tel, f_bip_outlook, 
+      f_bip_cardaddress, f_bip_nowaddress, f_bip_handwrite, 
+      f_bip_headimage, f_bip_recentimage, f_bip_type, 
+      f_bip_firstclass, f_bip_secondclass, f_bip_thirdclass, 
+      f_bip_peoplenum, f_bip_utilname, f_bip_eventdetails, 
+      f_bip_eventresult, f_bip_createorganization, 
+      f_bip_birthdate, f_bip_recepterduty, f_bip_dutyman, 
+      f_bip_dealstatus, f_bip_receptertel)
+    values (#{fid,jdbcType=VARCHAR}, #{fbillno,jdbcType=VARCHAR}, #{fdocumentstatus,jdbcType=CHAR}, 
+      #{fcreatorid,jdbcType=INTEGER}, #{fcreatedate,jdbcType=TIMESTAMP}, #{fmodifierid,jdbcType=INTEGER}, 
+      #{fmodifydate,jdbcType=TIMESTAMP}, #{fBipUserid,jdbcType=INTEGER}, #{fBipCheckdate,jdbcType=TIMESTAMP}, 
+      #{fBipPetitionername,jdbcType=VARCHAR}, #{fBipComplainantsnumerid,jdbcType=VARCHAR}, #{fBipNation,jdbcType=VARCHAR}, 
+      #{fBipSex,jdbcType=VARCHAR}, #{fBipPetitionerphone,jdbcType=VARCHAR}, #{fBipPoliticaloutlook,jdbcType=VARCHAR}, 
+      #{fBipNativeplace,jdbcType=VARCHAR}, #{fBipAddress,jdbcType=VARCHAR}, #{fBipIsmanualentry,jdbcType=CHAR}, 
+      #{fBipHeadimage,jdbcType=VARCHAR}, #{fBipRecentphotos,jdbcType=VARCHAR}, #{fBipPetitiontype,jdbcType=INTEGER}, 
+      #{fBipFirstclassify,jdbcType=VARCHAR}, #{fBipSecondclassify,jdbcType=VARCHAR}, #{fBipThirdclassify,jdbcType=VARCHAR}, 
+      #{fBipPetitionersnumber,jdbcType=INTEGER}, #{fBipPoweraffairs,jdbcType=INTEGER}, #{fBipRemarks,jdbcType=VARCHAR}, 
+      #{fBipRemark,jdbcType=VARCHAR}, #{fBipOrgid,jdbcType=INTEGER}, 
+      #{fBipBirthdate,jdbcType=TIMESTAMP}, #{fBipRecepterduty,jdbcType=VARCHAR}, #{fBipDutyman,jdbcType=VARCHAR}, 
+      #{fBipDealstatus,jdbcType=VARCHAR}, #{fBipReceptertel,jdbcType=VARCHAR})
+  </insert>
+  
+  <!-- 查询现场登记列表 -->
+  <select id="selectList" resultType="java.util.HashMap">
+  	select 
+	FBillNo,
+	F_BIP_DealStatus,
+	FCreateDate,
+	F_BIP_PeopleNum,
+	(select fname from bip_t_poweraffairs where fid = F_BIP_UtilName) as poweraffair,
+	F_BIP_EventDetails,
+	F_BIP_EventResult,
+	F_BIP_RecepterDuty,
+	F_BIP_DutyMan,
+	F_BIP_DealStatus
+	from 
+	bip_t_cust_eventmessage
+  </select>
+  
+  <!-- 修改时显示单据头信息 -->
+  <select id="showHeadData" resultType="java.util.HashMap">
+  	SELECT
+	fbillno,
+	fdocumentstatus ,
+	fcreatorid,
+	(select username from t_user where id= fcreatorid) as creatorName,
+	fcreatedate,
+	fmodifierid,
+	(select username from t_user where id= fmodifierid) as modifierName,
+	fmodifydate,
+	f_bip_checkerid as fBipUserid,
+	(select username from t_user where id= f_bip_checkerid) as checkerName,
+	f_bip_checkdate as fBipCheckdate,
+	f_bip_name as fBipPetitionername,
+	f_bip_idcard as fBipComplainantsnumerid,
+	f_bip_nation as fBipNation,
+	f_bip_sex  as fBipSex,
+	f_bip_tel as fBipPetitionerphone,
+	f_bip_outlook as fBipPoliticaloutlook,
+	(select fcaption from v_politicaloutlook where fpkid = f_bip_outlook) as outlook,
+	f_bip_cardaddress as fBipNativeplace,
+	f_bip_nowaddress as fBipAddress,
+	f_bip_handwrite as fBipIsmanualentry,
+	f_bip_headimage as fBipHeadimage,
+	f_bip_recentimage as fBipRecentphotos,
+	f_bip_type as fBipPetitiontype,
+	f_bip_firstclass as fBipFirstclassify,
+	(select fdatavalue from v_firstclassify where fentryid =  f_bip_firstclass) as firstclass ,
+	f_bip_secondclass as fBipSecondclassify,
+	(select fdatavalue from v_secondclassify where fentryid =  f_bip_secondclass) as secondclass,
+	f_bip_thirdclass as fBipThirdclassify,
+	(select fdatavalue from v_thirdclassify where fentryid =  f_bip_thirdclass) as thirdclass,
+	f_bip_peoplenum as fBipPetitionersnumber,
+	f_bip_utilname as fBipPoweraffairs,
+	(select fname from bip_t_poweraffairs where fid = f_bip_utilname) as poweraffair,
+	f_bip_eventdetails as fBipRemarks,
+	f_bip_eventresult as fBipRemark,
+	f_bip_createorganization as fBipOrgid,
+	f_bip_birthdate as fBipBirthdate,
+	f_bip_recepterduty as fBipRecepterduty,
+	f_bip_dutyman as fBipDutyman,
+	f_bip_dealstatus as fBipDealstatus,
+	f_bip_receptertel as fBipReceptertel
+	
+FROM
+	bip_t_cust_eventmessage where fid=#{fid}
+  </select>
+  
+  <!-- 逆向生成 -->
+ <!--  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    fid, fbillno, fdocumentstatus, fcreatorid, fcreatedate, fmodifierid, fmodifydate, 
+    f_bip_checkerid, f_bip_checkdate, f_bip_name, f_bip_idcard, f_bip_nation, f_bip_sex, 
+    f_bip_tel, f_bip_outlook, f_bip_cardaddress, f_bip_nowaddress, f_bip_handwrite, f_bip_headimage, 
+    f_bip_recentimage, f_bip_type, f_bip_firstclass, f_bip_secondclass, f_bip_thirdclass, 
+    f_bip_peoplenum, f_bip_utilname, f_bip_eventdetails, f_bip_eventresult, f_bip_createorganization, 
+    f_bip_birthdate, f_bip_recepterduty, f_bip_dutyman, f_bip_dealstatus, f_bip_receptertel
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.kingcai.entity.BipTCustEventmessageExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from bip_t_cust_eventmessage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="cn.kingcai.entity.BipTCustEventmessageExample" >
+    delete from bip_t_cust_eventmessage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.kingcai.entity.BipTCustEventmessage" >
+    insert into bip_t_cust_eventmessage (fid, fbillno, fdocumentstatus, 
+      fcreatorid, fcreatedate, fmodifierid, 
+      fmodifydate, f_bip_checkerid, f_bip_checkdate, 
+      f_bip_name, f_bip_idcard, f_bip_nation, 
+      f_bip_sex, f_bip_tel, f_bip_outlook, 
+      f_bip_cardaddress, f_bip_nowaddress, f_bip_handwrite, 
+      f_bip_headimage, f_bip_recentimage, f_bip_type, 
+      f_bip_firstclass, f_bip_secondclass, f_bip_thirdclass, 
+      f_bip_peoplenum, f_bip_utilname, f_bip_eventdetails, 
+      f_bip_eventresult, f_bip_createorganization, 
+      f_bip_birthdate, f_bip_recepterduty, f_bip_dutyman, 
+      f_bip_dealstatus, f_bip_receptertel)
+    values (#{fid,jdbcType=BIGINT}, #{fbillno,jdbcType=VARCHAR}, #{fdocumentstatus,jdbcType=CHAR}, 
+      #{fcreatorid,jdbcType=INTEGER}, #{fcreatedate,jdbcType=TIMESTAMP}, #{fmodifierid,jdbcType=INTEGER}, 
+      #{fmodifydate,jdbcType=TIMESTAMP}, #{fBipCheckerid,jdbcType=INTEGER}, #{fBipCheckdate,jdbcType=TIMESTAMP}, 
+      #{fBipName,jdbcType=VARCHAR}, #{fBipIdcard,jdbcType=VARCHAR}, #{fBipNation,jdbcType=VARCHAR}, 
+      #{fBipSex,jdbcType=VARCHAR}, #{fBipTel,jdbcType=VARCHAR}, #{fBipOutlook,jdbcType=VARCHAR}, 
+      #{fBipCardaddress,jdbcType=VARCHAR}, #{fBipNowaddress,jdbcType=VARCHAR}, #{fBipHandwrite,jdbcType=CHAR}, 
+      #{fBipHeadimage,jdbcType=VARCHAR}, #{fBipRecentimage,jdbcType=VARCHAR}, #{fBipType,jdbcType=INTEGER}, 
+      #{fBipFirstclass,jdbcType=VARCHAR}, #{fBipSecondclass,jdbcType=VARCHAR}, #{fBipThirdclass,jdbcType=VARCHAR}, 
+      #{fBipPeoplenum,jdbcType=INTEGER}, #{fBipUtilname,jdbcType=INTEGER}, #{fBipEventdetails,jdbcType=VARCHAR}, 
+      #{fBipEventresult,jdbcType=VARCHAR}, #{fBipCreateorganization,jdbcType=INTEGER}, 
+      #{fBipBirthdate,jdbcType=TIMESTAMP}, #{fBipRecepterduty,jdbcType=VARCHAR}, #{fBipDutyman,jdbcType=VARCHAR}, 
+      #{fBipDealstatus,jdbcType=VARCHAR}, #{fBipReceptertel,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.kingcai.entity.BipTCustEventmessage" >
+    insert into bip_t_cust_eventmessage
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        fid,
+      </if>
+      <if test="fbillno != null" >
+        fbillno,
+      </if>
+      <if test="fdocumentstatus != null" >
+        fdocumentstatus,
+      </if>
+      <if test="fcreatorid != null" >
+        fcreatorid,
+      </if>
+      <if test="fcreatedate != null" >
+        fcreatedate,
+      </if>
+      <if test="fmodifierid != null" >
+        fmodifierid,
+      </if>
+      <if test="fmodifydate != null" >
+        fmodifydate,
+      </if>
+      <if test="fBipCheckerid != null" >
+        f_bip_checkerid,
+      </if>
+      <if test="fBipCheckdate != null" >
+        f_bip_checkdate,
+      </if>
+      <if test="fBipName != null" >
+        f_bip_name,
+      </if>
+      <if test="fBipIdcard != null" >
+        f_bip_idcard,
+      </if>
+      <if test="fBipNation != null" >
+        f_bip_nation,
+      </if>
+      <if test="fBipSex != null" >
+        f_bip_sex,
+      </if>
+      <if test="fBipTel != null" >
+        f_bip_tel,
+      </if>
+      <if test="fBipOutlook != null" >
+        f_bip_outlook,
+      </if>
+      <if test="fBipCardaddress != null" >
+        f_bip_cardaddress,
+      </if>
+      <if test="fBipNowaddress != null" >
+        f_bip_nowaddress,
+      </if>
+      <if test="fBipHandwrite != null" >
+        f_bip_handwrite,
+      </if>
+      <if test="fBipHeadimage != null" >
+        f_bip_headimage,
+      </if>
+      <if test="fBipRecentimage != null" >
+        f_bip_recentimage,
+      </if>
+      <if test="fBipType != null" >
+        f_bip_type,
+      </if>
+      <if test="fBipFirstclass != null" >
+        f_bip_firstclass,
+      </if>
+      <if test="fBipSecondclass != null" >
+        f_bip_secondclass,
+      </if>
+      <if test="fBipThirdclass != null" >
+        f_bip_thirdclass,
+      </if>
+      <if test="fBipPeoplenum != null" >
+        f_bip_peoplenum,
+      </if>
+      <if test="fBipUtilname != null" >
+        f_bip_utilname,
+      </if>
+      <if test="fBipEventdetails != null" >
+        f_bip_eventdetails,
+      </if>
+      <if test="fBipEventresult != null" >
+        f_bip_eventresult,
+      </if>
+      <if test="fBipCreateorganization != null" >
+        f_bip_createorganization,
+      </if>
+      <if test="fBipBirthdate != null" >
+        f_bip_birthdate,
+      </if>
+      <if test="fBipRecepterduty != null" >
+        f_bip_recepterduty,
+      </if>
+      <if test="fBipDutyman != null" >
+        f_bip_dutyman,
+      </if>
+      <if test="fBipDealstatus != null" >
+        f_bip_dealstatus,
+      </if>
+      <if test="fBipReceptertel != null" >
+        f_bip_receptertel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fid != null" >
+        #{fid,jdbcType=BIGINT},
+      </if>
+      <if test="fbillno != null" >
+        #{fbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="fdocumentstatus != null" >
+        #{fdocumentstatus,jdbcType=CHAR},
+      </if>
+      <if test="fcreatorid != null" >
+        #{fcreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="fcreatedate != null" >
+        #{fcreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fmodifierid != null" >
+        #{fmodifierid,jdbcType=INTEGER},
+      </if>
+      <if test="fmodifydate != null" >
+        #{fmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipCheckerid != null" >
+        #{fBipCheckerid,jdbcType=INTEGER},
+      </if>
+      <if test="fBipCheckdate != null" >
+        #{fBipCheckdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipName != null" >
+        #{fBipName,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipIdcard != null" >
+        #{fBipIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipNation != null" >
+        #{fBipNation,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipSex != null" >
+        #{fBipSex,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipTel != null" >
+        #{fBipTel,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipOutlook != null" >
+        #{fBipOutlook,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipCardaddress != null" >
+        #{fBipCardaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipNowaddress != null" >
+        #{fBipNowaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipHandwrite != null" >
+        #{fBipHandwrite,jdbcType=CHAR},
+      </if>
+      <if test="fBipHeadimage != null" >
+        #{fBipHeadimage,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipRecentimage != null" >
+        #{fBipRecentimage,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipType != null" >
+        #{fBipType,jdbcType=INTEGER},
+      </if>
+      <if test="fBipFirstclass != null" >
+        #{fBipFirstclass,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipSecondclass != null" >
+        #{fBipSecondclass,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipThirdclass != null" >
+        #{fBipThirdclass,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipPeoplenum != null" >
+        #{fBipPeoplenum,jdbcType=INTEGER},
+      </if>
+      <if test="fBipUtilname != null" >
+        #{fBipUtilname,jdbcType=INTEGER},
+      </if>
+      <if test="fBipEventdetails != null" >
+        #{fBipEventdetails,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipEventresult != null" >
+        #{fBipEventresult,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipCreateorganization != null" >
+        #{fBipCreateorganization,jdbcType=INTEGER},
+      </if>
+      <if test="fBipBirthdate != null" >
+        #{fBipBirthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fBipRecepterduty != null" >
+        #{fBipRecepterduty,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipDutyman != null" >
+        #{fBipDutyman,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipDealstatus != null" >
+        #{fBipDealstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="fBipReceptertel != null" >
+        #{fBipReceptertel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.kingcai.entity.BipTCustEventmessageExample" resultType="java.lang.Integer" >
+    select count(*) from bip_t_cust_eventmessage
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update bip_t_cust_eventmessage
+    <set >
+      <if test="record.fid != null" >
+        fid = #{record.fid,jdbcType=BIGINT},
+      </if>
+      <if test="record.fbillno != null" >
+        fbillno = #{record.fbillno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fdocumentstatus != null" >
+        fdocumentstatus = #{record.fdocumentstatus,jdbcType=CHAR},
+      </if>
+      <if test="record.fcreatorid != null" >
+        fcreatorid = #{record.fcreatorid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fcreatedate != null" >
+        fcreatedate = #{record.fcreatedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fmodifierid != null" >
+        fmodifierid = #{record.fmodifierid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fmodifydate != null" >
+        fmodifydate = #{record.fmodifydate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipCheckerid != null" >
+        f_bip_checkerid = #{record.fBipCheckerid,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipCheckdate != null" >
+        f_bip_checkdate = #{record.fBipCheckdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipName != null" >
+        f_bip_name = #{record.fBipName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipIdcard != null" >
+        f_bip_idcard = #{record.fBipIdcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipNation != null" >
+        f_bip_nation = #{record.fBipNation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipSex != null" >
+        f_bip_sex = #{record.fBipSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipTel != null" >
+        f_bip_tel = #{record.fBipTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipOutlook != null" >
+        f_bip_outlook = #{record.fBipOutlook,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipCardaddress != null" >
+        f_bip_cardaddress = #{record.fBipCardaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipNowaddress != null" >
+        f_bip_nowaddress = #{record.fBipNowaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipHandwrite != null" >
+        f_bip_handwrite = #{record.fBipHandwrite,jdbcType=CHAR},
+      </if>
+      <if test="record.fBipHeadimage != null" >
+        f_bip_headimage = #{record.fBipHeadimage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipRecentimage != null" >
+        f_bip_recentimage = #{record.fBipRecentimage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipType != null" >
+        f_bip_type = #{record.fBipType,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipFirstclass != null" >
+        f_bip_firstclass = #{record.fBipFirstclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipSecondclass != null" >
+        f_bip_secondclass = #{record.fBipSecondclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipThirdclass != null" >
+        f_bip_thirdclass = #{record.fBipThirdclass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipPeoplenum != null" >
+        f_bip_peoplenum = #{record.fBipPeoplenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipUtilname != null" >
+        f_bip_utilname = #{record.fBipUtilname,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipEventdetails != null" >
+        f_bip_eventdetails = #{record.fBipEventdetails,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipEventresult != null" >
+        f_bip_eventresult = #{record.fBipEventresult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipCreateorganization != null" >
+        f_bip_createorganization = #{record.fBipCreateorganization,jdbcType=INTEGER},
+      </if>
+      <if test="record.fBipBirthdate != null" >
+        f_bip_birthdate = #{record.fBipBirthdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.fBipRecepterduty != null" >
+        f_bip_recepterduty = #{record.fBipRecepterduty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipDutyman != null" >
+        f_bip_dutyman = #{record.fBipDutyman,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipDealstatus != null" >
+        f_bip_dealstatus = #{record.fBipDealstatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fBipReceptertel != null" >
+        f_bip_receptertel = #{record.fBipReceptertel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update bip_t_cust_eventmessage
+    set fid = #{record.fid,jdbcType=BIGINT},
+      fbillno = #{record.fbillno,jdbcType=VARCHAR},
+      fdocumentstatus = #{record.fdocumentstatus,jdbcType=CHAR},
+      fcreatorid = #{record.fcreatorid,jdbcType=INTEGER},
+      fcreatedate = #{record.fcreatedate,jdbcType=TIMESTAMP},
+      fmodifierid = #{record.fmodifierid,jdbcType=INTEGER},
+      fmodifydate = #{record.fmodifydate,jdbcType=TIMESTAMP},
+      f_bip_checkerid = #{record.fBipCheckerid,jdbcType=INTEGER},
+      f_bip_checkdate = #{record.fBipCheckdate,jdbcType=TIMESTAMP},
+      f_bip_name = #{record.fBipName,jdbcType=VARCHAR},
+      f_bip_idcard = #{record.fBipIdcard,jdbcType=VARCHAR},
+      f_bip_nation = #{record.fBipNation,jdbcType=VARCHAR},
+      f_bip_sex = #{record.fBipSex,jdbcType=VARCHAR},
+      f_bip_tel = #{record.fBipTel,jdbcType=VARCHAR},
+      f_bip_outlook = #{record.fBipOutlook,jdbcType=VARCHAR},
+      f_bip_cardaddress = #{record.fBipCardaddress,jdbcType=VARCHAR},
+      f_bip_nowaddress = #{record.fBipNowaddress,jdbcType=VARCHAR},
+      f_bip_handwrite = #{record.fBipHandwrite,jdbcType=CHAR},
+      f_bip_headimage = #{record.fBipHeadimage,jdbcType=VARCHAR},
+      f_bip_recentimage = #{record.fBipRecentimage,jdbcType=VARCHAR},
+      f_bip_type = #{record.fBipType,jdbcType=INTEGER},
+      f_bip_firstclass = #{record.fBipFirstclass,jdbcType=VARCHAR},
+      f_bip_secondclass = #{record.fBipSecondclass,jdbcType=VARCHAR},
+      f_bip_thirdclass = #{record.fBipThirdclass,jdbcType=VARCHAR},
+      f_bip_peoplenum = #{record.fBipPeoplenum,jdbcType=INTEGER},
+      f_bip_utilname = #{record.fBipUtilname,jdbcType=INTEGER},
+      f_bip_eventdetails = #{record.fBipEventdetails,jdbcType=VARCHAR},
+      f_bip_eventresult = #{record.fBipEventresult,jdbcType=VARCHAR},
+      f_bip_createorganization = #{record.fBipCreateorganization,jdbcType=INTEGER},
+      f_bip_birthdate = #{record.fBipBirthdate,jdbcType=TIMESTAMP},
+      f_bip_recepterduty = #{record.fBipRecepterduty,jdbcType=VARCHAR},
+      f_bip_dutyman = #{record.fBipDutyman,jdbcType=VARCHAR},
+      f_bip_dealstatus = #{record.fBipDealstatus,jdbcType=VARCHAR},
+      f_bip_receptertel = #{record.fBipReceptertel,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update> -->
+</mapper>
